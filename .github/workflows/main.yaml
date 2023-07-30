@@ -25,4 +25,4 @@ jobs:
           sudo chmod +x /usr/local/bin/yq                   
       - name: Replace image tag in values.yaml
         run: |
-          yq eval -i '.spec.template.spec.containers[0].tag = "new-tag"' ./values.yaml
+          yq eval -i '.spec.template.spec.containers[0].tag = ${{ github.sha }}' ./values.yaml
