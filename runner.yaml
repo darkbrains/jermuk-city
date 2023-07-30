@@ -2,7 +2,7 @@ apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
 metadata:
   name: jermuk-city-runner-deploy
-  namespace: arc
+  namespace: actions
 spec:
   replicas: 1
   template:
