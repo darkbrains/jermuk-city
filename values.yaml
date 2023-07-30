@@ -26,7 +26,7 @@ spec:
             cpu: "8m"      
         ports:
           - containerPort: 8888
-            name: http-jermuk-city    
+            name: http-svc   
         command:
           - uvicorn
         args:
@@ -69,10 +69,10 @@ spec:
   selector:
     app: jermuk-city
   ports:
-  - name: http-jermuk-city
+  - name: http-svc
     protocol: TCP
     port: 8888
-    targetPort: http-jermuk-city
+    targetPort: http-svc
 
 ---
 
