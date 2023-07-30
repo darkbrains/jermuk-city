@@ -25,7 +25,7 @@ spec:
             memory: "64Mi"
             cpu: "8m"      
         ports:
-          - containerPort: 8083
+          - containerPort: 8888
             name: http-jermuk-city    
         command:
           - uvicorn
