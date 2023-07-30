@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations: 
+    notifications.argoproj.io/subscribe.on-health-degraded.slack: alerts
+    notifications.argoproj.io/subscribe.on-sync-failed.slack: alerts
+    notifications.argoproj.io/subscribe.on-sync-running.slack: alerts
+    notifications.argoproj.io/subscribe.on-sync-status-unknown.slack: alerts
+    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: alerts
+  name: jermuk-city
+  namespace: argo-cd
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:Blackdocs-Cloud/jermuk-city.git
+    targetRevision: main
+    path: ./
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: jermuk-city
