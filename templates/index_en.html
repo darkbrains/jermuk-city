@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" type="image/x-icon" href="/static/deer.png?v=3" />
+  <title>Jermuk</title>
+  <style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url("/static/background_main.jpg?v=3");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    opacity: 0.9;
+    color: #fff;
+    animation: breezeAnimation 60s infinite linear;
+    }
+    @keyframes breezeAnimation {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+    }
+    header {
+      position: relative;
+      background-color: rgba(144, 158, 134, 0.582);
+      color: #222;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      padding: 33px;
+      text-align: center;
+      border-bottom: 2px solid rgba(110, 92, 77, 0.521);
+      border-radius: 0 0 20px 20px;
+      animation: fadeInDown 1s ease;
+    }   
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+      cursor: pointer;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    p {
+      font-size: 23px;
+      line-height: 1.6;
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    nav ul li {
+      margin-right: 20px;
+    }
+    nav ul li a {
+      color: #222;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      text-decoration: none;
+      font-size: 20px;
+    }
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+    main {
+      padding: 20px;
+    }
+    section {
+      margin-bottom: 80px;
+      background-color: rgba(144, 158, 134, 0.582);
+      padding: 40px;
+      border-radius: 40px;
+      color: #222;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+    .photo-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 30px;
+      padding: 30px;
+    }
+    .photo-item {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 20px;
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .photo-item img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .photo-item img:hover {
+      transform: scale(1.05);
+    }
+    .slideshow-container {
+      position: relative;
+      max-width: 100%;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+    .slideshow-container img {
+      width: 100%;
+      height: auto;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .slide-fade {
+      animation: fade 10s infinite;
+    }
+    @keyframes fade {
+      0%, 100% {
+        opacity: 0;
+      }
+      10%, 90% {
+        opacity: 1;
+      }
+    }
+    footer {
+      background-color: rgba(144, 158, 134, 0.582);
+      color: #333;
+      text-align: center;
+      padding: 10px;
+      clear: both;
+      border-top: 2px solid rgba(110, 92, 77, 0.521);
+      border-radius: 20px 20px 0 0;
+    }
+    footer p {
+      margin: 0;
+      color: #222;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 9999;
+    }
+    .modal-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+    }
+    .modal-content img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    @keyframes rotateTitle {
+      0%, 100% {
+        transform: rotate(-3deg);
+      }
+      50% {
+        transform: rotate(3deg);
+      }
+    }
+    @media screen and (max-width: 768px) {
+      body {
+        background-size: cover;
+        opacity: 1;
+      }
+      section {
+        margin: 20px;
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      }
+      .photo-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+      }
+      .photo-item {
+        max-width: 100%;
+      }
+    }
+    .birds,
+    .leaves {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        font-size: 24px;
+        z-index: -1;
+    }
+    .bird,
+    .leaf {
+        position: absolute;
+        font-size: 24px;
+        animation-timing-function: ease-in-out;
+    }
+    @keyframes flyBirds {
+        0% {
+            transform: translateY(-50%) translateX(100%);
+        }
+        100% {
+            transform: translateY(-50%) translateX(-100%);
+        }
+    }
+    @keyframes fallLeaves {
+        0% {
+            transform: translateY(-20px) rotate(0deg);
+        }
+        100% {
+            transform: translateY(100vh) rotate(360deg);
+        }
+    }
+    .language-selection {
+        position: absolute;
+        top: 15px;
+        right: 40px;
+        transform: translateY(-50%);
+        }
+        .language-selection button,
+        .section-links a {
+        background-color: rgba(144, 158, 134, 0.582);
+        color: #222;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        padding: 6px 12px;
+        border-radius: 20px;
+        transition: background-color 0.3s ease;
+        text-decoration: none; 
+        }
+        .language-selection button:hover,
+        .section-links a:hover {
+        background-color: rgba(110, 92, 77, 0.521);
+        color: #fff;
+        text-decoration: none; 
+        }
+        .language-options {
+        position: absolute;
+        top: 30px;
+        right: 0;
+        display: none;
+        }
+        .language-options button {
+        background-color: rgba(144, 158, 134, 0.582);
+        color: #222;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        padding: 6px 12px;
+        border-radius: 20px;
+        margin-top: 5px;
+        display: block;
+        width: 60px;
+        text-align: center;
+        }
+        .language-options button:hover {
+        background-color: rgba(110, 92, 77, 0.521);
+        color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="flying-lights"></div>
+  <div class="birds"></div>    
+  <header>
+    <h1 id="headerTitle">Jermuk City</h1>
+    <div class="language-selection">
+        <button onmouseover="showLanguageOptions()" onmouseout="hideLanguageOptions()">Language</button>
+        <div class="language-options" onmouseover="showLanguageOptions()" onmouseout="hideLanguageOptions()">
+          <button onclick="changeLanguage('ARM')">Հայ</button>
+          <button onclick="changeLanguage('RUS')">Рус</button>
+          <button onclick="changeLanguage('ENG')">Eng</button>
+        </div>
+    </div>          
+    <nav>
+    <nav>
+      <ul>
+        <li class="section-links"><a href="#about">About</a></li>
+        <li class="section-links"><a href="#photos">Photos</a></li>
+        <li class="section-links"><a href="#contact">Contacts</a></li>
+      </ul>
+    </nav>
+    </nav> 
+  </header>
+  <main>
+    <section id="welcome">
+       <h2>Welcome to Jermuk - Armenia's Jewel!</h2>
+       <p> 
+        Discover a city of natural wonders, history, and warm hospitality. Immerse yourself in mineral-rich hot springs, explore ancient churches, and witness the majestic Jermuk Waterfall. For adventure seekers, hiking trails and breathtaking vistas await. Taste authentic Armenian cuisine and embrace the charm of Jermuk. Welcome to our treasured city! 🌟🇦🇲 
+    </p>
+    </section>
+    <section id="photos">
+      <h2>Photos of Jermuk</h2>
+      <div class="photo-gallery">
+        <div class="photo-item" onclick="openModal('/static/one.jpg?v=3')">
+          <img src="/static/one.jpg?v=3" alt="Photo 1">
+        </div>
+        <div class="photo-item" onclick="openModal('/static/two.jpg?v=3')">
+          <img src="/static/two.jpg?v=3" alt="Photo 2">
+        </div>
+        <div class="photo-item" onclick="openModal('/static/three.jpg?v=3')">
+          <img src="/static/three.jpg?v=3" alt="Photo 3">
+        </div>
+        <div class="photo-item" onclick="openModal('/static/four.jpg?v=3')">
+          <img src="/static/four.jpg?v=3" alt="Photo 4">
+        </div>
+        <div class="photo-item" onclick="openModal('/static/five.jpg?v=3')">
+          <img src="/static/five.jpg?v=3" alt="Photo 5">
+        </div>
+        <div class="photo-item" onclick="openModal('/static/six.jpg?v=3')">
+          <img src="/static/six.jpg?v=3" alt="Photo 6">
+        </div>
+      </div>
+    </section>
+    <section id="about">
+        <h2>About Jermuk City</h2>
+        <p>
+          Jermuk is one of the most famous resort towns in Armenia. It is located in the North-Eastern part of Vayots Dzor region, at an altitude of about 2050 meters above sea level, at the upper reaches of the Arpa River. Flowing through the town, the latter divides it into two parts. The resort is surrounded by picturesque mountain ranges covered with dense forests and alpine meadows.
+          Zvartnots International Airport is 180 km from the property.
+      </p>
+        <h2>Climate</h2>
+        <p>
+          The summers are not so hot here, while the winters are windless and full of snow. The air temperature does not exceed +32C, and reaches as low as -35C in winter.
+      </p>
+        <h2>Mineral Waters</h2>
+        <p>
+          Jermuk is rich with unique fresh and mineral water springs. Among them noteworthy are the warm mineral springs, which rank on a par with similar springs in Karlovy Vary and Zheleznovodsk due to their physical and chemical characteristics. This underground geyser water is used both for drinking and for baths. It is useful for the treatment of various diseases, including gastrointestinal, nephritic and neurological disorders.
+      </p>
+         <h2>Legend of the Deer</h2>
+         <p>  
+          You can see the statue of a deer on a nearby mountain top, as well as a deer pictured on the label of Jermuk mineral water bottles. The legend has it that many years ago when the surrounding forests were full of animals, a hunter wounded a deer with an arrow. The deer ran away and came to the mineral waters of Jermuk. Completely exhausted, the deer jumped into the water and soon came out of it fully cured. The word of the miraculous cure spread fast, and the deer became the symbol of Jermuk.        
+      </p>  
+      </section>
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p>
+        For more information about Jermuk City, feel free to contact us:
+        <br>
+        Email: info@jermukcity.com
+        <br>
+        Phone: +1 234-567-8901
+      </p>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2023 Your Name. All rights reserved.</p>
+  </footer>
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <img id="modalImage" src="" alt="Full-Screen Photo">
+    </div>
+  </div>
+  <div class="flying-lights"></div>
+  <div class="birds"></div>
+  <div class="leaves"></div>
+  <script>
+    const images = document.querySelectorAll('.photo-item img');
+    let currentImageIndex = 0;
+    function showNextImage() {
+      images[currentImageIndex].style.animation = '';
+      currentImageIndex = (currentImageIndex + 1) % images.length;
+      images[currentImageIndex].style.animation = 'fade 10s infinite';
+    }
+    setInterval(showNextImage, 10000);
+    const headerTitle = document.getElementById('headerTitle');
+    function rotateHeaderTitle() {
+      headerTitle.style.transform = `rotate(${Math.random() * 6 - 3}deg)`;
+    }
+    setInterval(rotateHeaderTitle, 1000);
+    function openModal(imageSrc) {
+      const modal = document.getElementById('modal');
+      const modalImage = document.getElementById('modalImage');
+      modalImage.src = imageSrc;
+      modal.style.display = 'block';
+    }
+    window.onclick = function(event) {
+      const modal = document.getElementById('modal');
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    }
+    const birdsContainer = document.querySelector('.birds');
+    function createBird() {
+        const bird = document.createElement('div');
+        bird.classList.add('bird');
+        bird.style.left = Math.random() * 100 + 'vw';
+        bird.style.top = Math.random() * 100 + 'vh';
+        bird.style.animationDuration = Math.random() * 2 + 3 + 's';
+        bird.innerText = '🕊️';
+        birdsContainer.appendChild(bird);
+        setTimeout(() => {
+            bird.remove();
+        }, 5000);
+    }
+    setInterval(createBird, 3000);
+    const leavesContainer = document.querySelector('.leaves');
+    function createLeaf() {
+        const leaf = document.createElement('div');
+        leaf.classList.add('leaf');
+        leaf.style.left = Math.random() * 100 + 'vw';
+        leaf.style.top = Math.random() * 100 + 'vh';
+        leaf.style.animationDuration = Math.random() * 2 + 3 + 's';
+        leaf.innerText = '🌿';
+        leavesContainer.appendChild(leaf);
+        setTimeout(() => {
+            leaf.remove();
+        }, 5000);
+    }
+    setInterval(createLeaf, 3000); 
+    function showLanguageOptions() {
+    document.querySelector('.language-options').style.display = 'block';
+    }
+    function hideLanguageOptions() {
+        document.querySelector('.language-options').style.display = 'none';
+    }
+    function changeLanguage(lang) {
+        console.log(`Selected language: ${lang}`);
+        document.querySelector('.language-options').style.display = 'none';
+    }
+    function changeLanguage(language) {
+        var url;
+        if (language === 'ARM') {
+            url = '/am';
+        } else if (language === 'RUS') {
+            url = '/ru';
+        } else if (language === 'ENG') {
+            url = '/en';
+        }
+        window.location.href = url;
+    }    
+  </script>  
+</body>
+</html>

@@ -1,0 +1,6 @@
+uvicorn
+fastapi
+jinja2
+pyyaml
+python-multipart
+pyroscope-io

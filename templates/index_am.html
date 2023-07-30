@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" type="image/x-icon" href="/static/deer.png?v=3" />
+  <title>Ջերմուկ</title>
+  <style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url("/static/background_main.jpg?v=3");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    opacity: 0.9;
+    color: #fff;
+    animation: breezeAnimation 60s infinite linear;
+    }
+    @keyframes breezeAnimation {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+    }
+    header {
+      position: relative;
+      background-color: rgba(144, 158, 134, 0.582);
+      color: #222;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      padding: 33px;
+      text-align: center;
+      border-bottom: 2px solid rgba(110, 92, 77, 0.521);
+      border-radius: 0 0 20px 20px;
+      animation: fadeInDown 1s ease;
+    }   
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+      cursor: pointer;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    p {
+      font-size: 23px;
+      line-height: 1.6;
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    nav ul li {
+      margin-right: 20px;
+    }
+    nav ul li a {
+      color: #222;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      text-decoration: none;
+      font-size: 20px;
+    }
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+    main {
+      padding: 20px;
+    }
+    section {
+      margin-bottom: 80px;
+      background-color: rgba(144, 158, 134, 0.582);
+      padding: 40px;
+      border-radius: 40px;
+      color: #222;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+    .photo-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 30px;
+      padding: 30px;
+    }
+    .photo-item {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 20px;
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .photo-item img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .photo-item img:hover {
+      transform: scale(1.05);
+    }
+    .slideshow-container {
+      position: relative;
+      max-width: 100%;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+    .slideshow-container img {
+      width: 100%;
+      height: auto;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .slide-fade {
+      animation: fade 10s infinite;
+    }
+    @keyframes fade {
+      0%, 100% {
+        opacity: 0;
+      }
+      10%, 90% {
+        opacity: 1;
+      }
+    }
+    footer {
+      background-color: rgba(144, 158, 134, 0.582);
+      color: #333;
+      text-align: center;
+      padding: 10px;
+      clear: both;
+      border-top: 2px solid rgba(110, 92, 77, 0.521);
+      border-radius: 20px 20px 0 0;
+    }
+    footer p {
+      margin: 0;
+      color: #222;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 9999;
+    }
+    .modal-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+    }
+    .modal-content img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    @keyframes rotateTitle {
+      0%, 100% {
+        transform: rotate(-3deg);
+      }
+      50% {
+        transform: rotate(3deg);
+      }
+    }
+    @media screen and (max-width: 768px) {
+    header {
+        padding: 8px;
+        text-align: center;
+    }
+    h1 {
+        font-size: 26px;
+    }
+    nav ul {
+        margin-top: 25px;
+    }
+    nav ul li {
+        margin: 5px;
+    }
+    nav ul li a {
+        font-size: 18px;
+        padding: 3px 8px;
+    }
+    }
+    .birds,
+    .leaves {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        font-size: 24px;
+        z-index: -1;
+    }
+    .bird,
+    .leaf {
+        position: absolute;
+        font-size: 24px;
+        animation-timing-function: ease-in-out;
+    }
+    @keyframes flyBirds {
+        0% {
+            transform: translateY(-50%) translateX(100%);
+        }
+        100% {
+            transform: translateY(-50%) translateX(-100%);
+        }
+    }
+    @keyframes fallLeaves {
+        0% {
+            transform: translateY(-20px) rotate(0deg);
+        }
+        100% {
+            transform: translateY(100vh) rotate(360deg);
+        }
+    }
+    .language-selection {
+        position: absolute;
+        top: 15px;
+        right: 40px;
+        transform: translateY(-50%);
+        }
+        .language-selection button,
+        .section-links a {
+        background-color: rgba(144, 158, 134, 0.582);
+        color: #222;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        padding: 6px 12px;
+        border-radius: 20px;
+        transition: background-color 0.3s ease;
+        text-decoration: none; 
+        }
+        .language-selection button:hover,
+        .section-links a:hover {
+        background-color: rgba(110, 92, 77, 0.521);
+        color: #fff;
+        text-decoration: none; 
+        }
+        .language-options {
+        position: absolute;
+        top: 30px;
+        right: 0;
+        display: none;
+        }
+        .language-options button {
+        background-color: rgba(144, 158, 134, 0.582);
+        color: #222;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        padding: 6px 12px;
+        border-radius: 20px;
+        margin-top: 5px;
+        display: block;
+        width: 60px;
+        text-align: center;
+        }
+        .language-options button:hover {
+        background-color: rgba(110, 92, 77, 0.521);
+        color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="flying-lights"></div>
+  <div class="birds"></div>    
+  <header>
+    <h1 id="headerTitle">Jermuk City</h1>
+    <div class="language-selection">
+        <button onmouseover="showLanguageOptions()" onmouseout="hideLanguageOptions()">Լեզու</button>
+        <div class="language-options" onmouseover="showLanguageOptions()" onmouseout="hideLanguageOptions()">
+          <button onclick="changeLanguage('ARM')">Հայ</button>
+          <button onclick="changeLanguage('RUS')">Рус</button>
+          <button onclick="changeLanguage('ENG')">Eng</button>
+        </div>
+    </div>          
+    <nav>
+    <nav>
+      <ul>
+        <li class="section-links"><a href="#about">Քաղաքի մասին</a></li>
+        <li class="section-links"><a href="#photos">Նկարներ</a></li>
+        <li class="section-links"><a href="#contact">Կապ մեզ հետ</a></li>
+      </ul>
+    </nav>
+    </nav> 
+  </header>
+  <main>
+    <section id="welcome">
+       <h2>Բարի գալուստ Ջերմուկ՝ Հայաստանի մարգարիտ:</h2>
+       <p> 
+        Բացահայտեք բնության հրաշալիքների, պատմության և ջերմ հյուրընկալության քաղաքը: Սուզվեք հանքային հարուստ տաք աղբյուրներում, տեսեք հնագույն եկեղեցիները և ականատես եղեք Ջերմուկի հիասքանչ ջրվեժին: Արկած փնտրողներին սպասում են արշավային արահետներ և շունչ կտրող տեսարաններ: Համտեսեք իսկական հայկական խոհանոցը և զգացեք Ջերմուկի հմայքը: Բարի գալուստ մեր թանկագին քաղաք: 🌟🇦🇲
+     </p>
+    </section>
+    <section id="photos">
+      <h2>Ջերմուկի լուսանկարները</h2>
+      <div class="photo-gallery">
+        <div class="photo-item" onclick="openModal('/static/one.jpg?v=3')">
+          <img src="/static/one.jpg?v=3" alt="Photo 1">
+        </div>
+        <div class="photo-item" onclick="openModal('/static/two.jpg?v=3')">
+          <img src="/static/two.jpg?v=3" alt="Photo 2">
+        </div>
+        <div class="photo-item" onclick="openModal('/static/three.jpg?v=3')">
+          <img src="/static/three.jpg?v=3" alt="Photo 3">
+        </div>
+        <div class="photo-item" onclick="openModal('/static/four.jpg?v=3')">
+          <img src="/static/four.jpg?v=3" alt="Photo 4">
+        </div>
+        <div class="photo-item" onclick="openModal('/static/five.jpg?v=3')">
+          <img src="/static/five.jpg?v=3" alt="Photo 5">
+        </div>
+        <div class="photo-item" onclick="openModal('/static/six.jpg?v=3')">
+          <img src="/static/six.jpg?v=3" alt="Photo 6">
+        </div>
+      </div>
+    </section>
+    <section id="about">
+        <h2>Ջերմուկ քաղաքի մասին</h2>
+        <p>
+           Ջերմուկը Հայաստանի ամենահայտնի առողջարանային քաղաքներից է։ Գտնվում է Վայոց ձորի մարզի հյուսիս-արևելյան մասում, ծովի մակարդակից մոտ 2050 մ բարձրության վրա, Արփա գետի վերին հոսանքի վրա։ Հոսելով քաղաքով՝ վերջինս այն բաժանում է երկու մասի։ Հանգստավայրը շրջապատված է գեղատեսիլ լեռնաշղթաներով՝ ծածկված խիտ անտառներով և ալպյան մարգագետիններով։
+           Զվարթնոց միջազգային օդանավակայանը 180 կմ հեռավորության վրա է։
+        </p>
+        <h2>Կլիմա</h2>
+        <p>
+           Այստեղ ամառներն այնքան էլ շոգ չեն, մինչդեռ ձմեռներն առանց քամի են ու ձյունով լի։ Օդի ջերմաստիճանը չի գերազանցում +32C, իսկ ձմռանը հասնում է -35C-ի։      
+        </p>
+        <h2>Հանքային ջրեր</h2>
+        <p>
+           Ջերմուկը հարուստ է քաղցրահամ և հանքային ջրերի եզակի աղբյուրներով։ Դրանցից ուշագրավ են տաք հանքային աղբյուրները, որոնք իրենց ֆիզիկա-քիմիական հատկանիշներով հավասարվում են Կառլովի Վարիի և Ժելեզնովոդսկի նմանատիպ աղբյուրներին: Այս ստորգետնյա գեյզերային ջուրն օգտագործվում է ինչպես խմելու, այնպես էլ լոգանքների համար։ Այն օգտակար է տարբեր հիվանդությունների, այդ թվում՝ աղեստամոքսային տրակտի, նեֆրիտիկ և նյարդաբանական խանգարումների բուժման համար։     
+         </p>
+         <h2>Եղնիկի լեգենդը</h2>
+         <p>  
+           Դուք կարող եք տեսնել մոտակա լեռան գագաթին գտնվող եղնիկի արձանը, ինչպես նաև Ջերմուկի հանքային ջրի շշերի պիտակի վրա պատկերված եղնիկը: Ավանդությունն ասում է, որ շատ տարիներ առաջ, երբ շրջակա անտառները լի էին կենդանիներով, որսորդը նետով վիրավորեց եղնիկին: Եղնիկը փախել է ու եկել Ջերմուկի հանքային ջրերի մոտ. Ամբողջովին հյուծված եղնիկը նետվել է ջուրը և շուտով դուրս է եկել այնտեղից ամբողջությամբ բուժված։ Հրաշափառ բուժման խոսքը արագ տարածվեց, իսկ եղնիկը դարձավ Ջերմուկի խորհրդանիշը։      
+        </p>  
+      </section>
+    <section id="contact">
+      <h2>Կապ մեզ հետ</h2>
+      <p>
+         Ջերմուկ քաղաքի մասին լրացուցիչ տեղեկությունների համար դիմեք մեզ՝
+        <br>
+        Էլ․ հասցե`   info@jermukcity.com
+        <br>
+        Հեռախոս`   +1 234-567-8901
+      </p>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2023 Բոլոր իրավունքները պաշտպանված են:</p>
+  </footer>
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <img id="modalImage" src="" alt="Full-Screen Photo">
+    </div>
+  </div>
+  <div class="flying-lights"></div>
+  <div class="birds"></div>
+  <div class="leaves"></div>
+  <script>
+    const images = document.querySelectorAll('.photo-item img');
+    let currentImageIndex = 0;
+    function showNextImage() {
+      images[currentImageIndex].style.animation = '';
+      currentImageIndex = (currentImageIndex + 1) % images.length;
+      images[currentImageIndex].style.animation = 'fade 10s infinite';
+    }
+    setInterval(showNextImage, 10000);
+    const headerTitle = document.getElementById('headerTitle');
+    function rotateHeaderTitle() {
+      headerTitle.style.transform = `rotate(${Math.random() * 6 - 3}deg)`;
+    }
+    setInterval(rotateHeaderTitle, 1000);
+    function openModal(imageSrc) {
+      const modal = document.getElementById('modal');
+      const modalImage = document.getElementById('modalImage');
+      modalImage.src = imageSrc;
+      modal.style.display = 'block';
+    }
+    window.onclick = function(event) {
+      const modal = document.getElementById('modal');
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    }
+    const birdsContainer = document.querySelector('.birds');
+    function createBird() {
+        const bird = document.createElement('div');
+        bird.classList.add('bird');
+        bird.style.left = Math.random() * 100 + 'vw';
+        bird.style.top = Math.random() * 100 + 'vh';
+        bird.style.animationDuration = Math.random() * 2 + 3 + 's';
+        bird.innerText = '🕊️';
+        birdsContainer.appendChild(bird);
+        setTimeout(() => {
+            bird.remove();
+        }, 5000);
+    }
+    setInterval(createBird, 3000);
+    const leavesContainer = document.querySelector('.leaves');
+    function createLeaf() {
+        const leaf = document.createElement('div');
+        leaf.classList.add('leaf');
+        leaf.style.left = Math.random() * 100 + 'vw';
+        leaf.style.top = Math.random() * 100 + 'vh';
+        leaf.style.animationDuration = Math.random() * 2 + 3 + 's';
+        leaf.innerText = '🌿';
+        leavesContainer.appendChild(leaf);
+        setTimeout(() => {
+            leaf.remove();
+        }, 5000);
+    }
+    setInterval(createLeaf, 3000); 
+    function showLanguageOptions() {
+    document.querySelector('.language-options').style.display = 'block';
+    }
+    function hideLanguageOptions() {
+        document.querySelector('.language-options').style.display = 'none';
+    }
+    function changeLanguage(lang) {
+        console.log(`Selected language: ${lang}`);
+        document.querySelector('.language-options').style.display = 'none';
+    }
+    function changeLanguage(language) {
+        var url;
+        if (language === 'ARM') {
+            url = '/am';
+        } else if (language === 'RUS') {
+            url = '/ru';
+        } else if (language === 'ENG') {
+            url = '/en';
+        }
+        window.location.href = url;
+    }    
+  </script>  
+</body>
+</html>

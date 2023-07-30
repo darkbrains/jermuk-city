@@ -1,0 +1,135 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: jermuk-city
+    env: aws      
+  name: jermuk-city
+  namespace: jermuk-city
+spec:
+  selector:
+    matchLabels:
+      app: jermuk-city
+  template:
+    metadata:
+      labels:
+        app: jermuk-city
+        env: aws         
+    spec:       
+      containers:
+      - image: docker.io/blackdocs/jermuk-city:latest
+        name: jermuk-city
+        imagePullPolicy: Always                
+        resources: 
+          requests:
+            memory: "64Mi"
+            cpu: "8m"      
+        ports:
+          - containerPort: 8083
+            name: http-jermuk-city    
+        command:
+          - uvicorn
+        args:
+          - main:app
+          - '--host'
+          - '0.0.0.0'
+          - '--port'
+          - '8888'  
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmp                    
+        livenessProbe: 
+          httpGet: 
+            path: /api/healthz
+            port: 8888
+          initialDelaySeconds: 15
+          periodSeconds: 5   
+        readinessProbe:
+          httpGet: 
+            path: /api/healthz
+            port: 8888
+          initialDelaySeconds: 15
+          periodSeconds: 5
+      volumes:
+      - name: tmp
+        emptyDir: {}           
+      terminationGracePeriodSeconds: 30
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: jermuk-city-svc
+  labels:
+    app: jermuk-city  
+    env: aws  
+  namespace: jermuk-city    
+spec:
+  selector:
+    app: jermuk-city
+  ports:
+  - name: http-jermuk-city
+    protocol: TCP
+    port: 8888
+    targetPort: http-jermuk-city
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: jermuk-city-ingress
+  namespace: jermuk-city
+  annotations:
+    cert-manager.io/cluster-issuer: production
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: jermuk-city.blackdocs.cloud
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: jermuk-city-svc
+            port:
+              number: 8888
+  tls:
+  - hosts:
+      - "*.blackdocs.cloud"
+    secretName: jermuk-city-tls            
+
+---
+
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: jermuk-city-autoscale
+  namespace: jermuk-city
+  labels:
+    app: jermuk-city
+    env: aws  
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: jermuk-city
+  minReplicas: 1
+  maxReplicas: 3
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 90        
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 90 
