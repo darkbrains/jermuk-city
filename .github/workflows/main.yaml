@@ -18,18 +18,14 @@ jobs:
           docker image build -t blackdocs/jermuk-city:${{ github.sha }} ./ 
       - name: Push Image
         run: |
-          docker image push   blackdocs/jermuk-city:${{ github.sha }}    
-      - name: Install yq
-        run: |
-          sudo wget https://github.com/mikefarah/yq/releases/download/v4.13.2/yq_linux_amd64 -O /usr/local/bin/yq
-          sudo chmod +x /usr/local/bin/yq                   
+          docker image push   blackdocs/jermuk-city:${{ github.sha }}                      
       - name: Replace image tag in values.yaml
         run: |
-          yq eval -i '.spec.template.spec.containers[0].tag = "${{ github.sha }}"' ./values.yaml
+          sed -i "s/\(image: docker.io\/blackdocs\/jermuk-city:\).*$/\1\${{ github.sha }}/" ./values.yaml
       - name: Commit and push changes
         run: |
           git config user.name "blackdocs"
           git config user.email "blackdocs@users.noreply.github.com"
-          git add Book-shop/values.yaml
+          git add .
           git commit -m "Update image tag to ${GITHUB_SHA}"
           git push           
