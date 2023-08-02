@@ -22,8 +22,11 @@ spec:
         imagePullPolicy: Always                
         resources: 
           requests:
-            memory: "64Mi"
-            cpu: "8m"      
+            memory: "10Mi"
+            cpu: "8m"
+          limits:
+            memory: "90Mi"
+            cpu: "18m"                  
         ports:
           - containerPort: 8888
             name: http-svc   
