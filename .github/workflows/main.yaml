@@ -21,7 +21,7 @@ jobs:
           docker image push   blackdocs/jermuk-city:${{ github.sha }}                      
       - name: Replace image tag in values.yaml
         run: |
-          sed -i "s/\(image: docker.io\/blackdocs\/jermuk-city:\).*$/\1${{ github.sha }}/" ./values.yaml
+          sed -i 's|image: docker.io/blackdocs/jermuk-city:.*|image: docker.io/blackdocs/jermuk-city:${{ github.sha }}|' ./values.yaml
       - name: Commit and push changes
         run: |
           git config user.name "blackdocs"
