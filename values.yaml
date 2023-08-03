@@ -46,19 +46,7 @@ spec:
             path: /api/healthz
             port: 8888
           initialDelaySeconds: 5
-          periodSeconds: 10
-        readinessProbe:
-          httpGet: 
-            path: /api/healthz
-            port: 8888
-          initialDelaySeconds: 5
-          periodSeconds: 10
-        startupProbe:
-          httpGet:
-            path: /api/healthz
-            port: 8888
-          initialDelaySeconds: 5
-          periodSeconds: 10    
+          periodSeconds: 120  
       volumes:
       - name: tmp
         emptyDir: {}           
