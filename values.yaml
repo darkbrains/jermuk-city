@@ -17,7 +17,7 @@ spec:
         env: aws         
     spec:       
       containers:
-      - image: docker.io/blackdocs/jermuk-city:c330df9340ede2d0aa63633b2c91b9eb43a62aed
+      - image: docker.io/blackdocs/jermuk-city:aed67dd8439091e727e40d013fd7121b74c7dce8
         name: jermuk-city
         imagePullPolicy: Always                
         resources: 
@@ -111,7 +111,7 @@ spec:
   tls:
   - hosts:
       - "*.jermuk.city"
-    secretName: jermuk-city-tls            
+    secretName: jermuk.city           
 
 ---
 
