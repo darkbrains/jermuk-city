@@ -128,12 +128,12 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: jermuk-city
-  minReplicas: 1
-  maxReplicas: 3
+  minReplicas: 2
+  maxReplicas: 6
   metrics:     
   - type: Resource
     resource:
       name: memory
       target:
         type: Utilization
-        averageUtilization: 50
+        averageUtilization: 100
