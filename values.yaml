@@ -136,10 +136,12 @@ spec:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: 90        
+        averageValue: 90         
+        # averageUtilization: 90        
   - type: Resource
     resource:
       name: memory
       target:
         type: Utilization
-        averageUtilization: 90 
+        # averageUtilization: 90 
+        averageValue: 99         
