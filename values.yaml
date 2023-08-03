@@ -56,6 +56,7 @@ spec:
         startupProbe:
           httpGet:
             path: /api/healthz
+            port: 8888
           initialDelaySeconds: 10
           periodSeconds: 50    
       volumes:
@@ -92,11 +93,12 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: production
     kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
     nginx.ingress.kubernetes.io/ssl-passthrough: "true"
 spec:
   ingressClassName: nginx
   rules:
-  - host: jermuk-city.blackdocs.cloud
+  - host: www.jermuk.city
     http:
       paths:
       - path: /
@@ -108,7 +110,7 @@ spec:
               number: 8888
   tls:
   - hosts:
-      - "*.blackdocs.cloud"
+      - "*.jermuk.city"
     secretName: jermuk-city-tls            
 
 ---
