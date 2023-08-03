@@ -25,8 +25,8 @@ spec:
             memory: "10Mi"
             cpu: "8m"
           limits:
-            memory: "138Mi"
-            cpu: "20m"                  
+            memory: "72Mi"
+            cpu: "50m"                  
         ports:
           - containerPort: 8888
             name: http-svc   
