@@ -39,8 +39,7 @@ spec:
           - '--port'
           - '8888'  
           - '--log-level'
-          - 'debug'
-          - '--use-colors'
+          - 'trace'
         volumeMounts:
         - mountPath: /tmp
           name: tmp                    
