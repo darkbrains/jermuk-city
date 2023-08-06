@@ -198,10 +198,10 @@ footer p {
         padding: 0%;        
     }   
     .photo-item-hotels {
-        max-width: 100%;
+        width: 100%;
     }
     .photo-item-hotels-more {
-        max-width: 100%;
+        width: 100%;
     }
     .modal-content {
         position: absolute;
