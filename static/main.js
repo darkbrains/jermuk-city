@@ -10,19 +10,42 @@ const headerTitle = document.getElementById('headerTitle');
 function rotateHeaderTitle() {
   headerTitle.style.transform = `rotate(${Math.random() * 6 - 3}deg)`;
 }
-setInterval(rotateHeaderTitle, 1000);
+let modalImageIndex = 0;
+function changeModalImage(offset) {
+  modalImageIndex += offset;
+  if (modalImageIndex < 0) {
+    modalImageIndex = images.length - 1;
+  } else if (modalImageIndex >= images.length) {
+    modalImageIndex = 0;
+  }
+  const modalImage = document.getElementById('modalImage');
+  modalImage.src = images[modalImageIndex].src;
+}
 function openModal(imageSrc) {
   const modal = document.getElementById('modal');
   const modalImage = document.getElementById('modalImage');
+  const prevButton = document.getElementById('prevButton');
+  const nextButton = document.getElementById('nextButton');
   modalImage.src = imageSrc;
   modal.style.display = 'block';
+  modalImageIndex = Array.from(images).findIndex(image => image.src === imageSrc);
+  prevButton.onclick = () => changeModalImage(-1);
+  nextButton.onclick = () => changeModalImage(1);
+  if (imageSrc.includes('jermuk-hotel-spa') || imageSrc.includes('resort') || imageSrc.includes('armenia')) {
+    prevButton.style.display = 'none';
+    nextButton.style.display = 'none';
+  } else {
+    prevButton.style.display = 'block';
+    nextButton.style.display = 'block';
+  }
 }
 window.onclick = function(event) {
   const modal = document.getElementById('modal');
   if (event.target === modal) {
     modal.style.display = 'none';
   }
-}
+};
+setInterval(rotateHeaderTitle, 1000);
 const birdsContainer = document.querySelector('.birds');
 function createBird() {
     const bird = document.createElement('div');

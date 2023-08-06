@@ -1,30 +1,48 @@
+const images = document.querySelectorAll('.photo-item-hs img');
 let currentImageIndex = 0;
-const images = ['templates/hotels_en.html', '//static/hotels/armenia/arm20.jpg', '/static/hotels/armenia/arm21.jpg'];
-const captions = ['Photo 1', 'Photo 2', 'Photo 3'];
-function openLightbox(imageSrc, caption) {
-    document.getElementById('lightboxImage').src = imageSrc;
-    document.getElementById('lightboxCaption').innerHTML = caption;
-    document.getElementById('lightbox').style.display = 'block';
-    currentImageIndex = images.indexOf(imageSrc);
-    updateLightboxButtons();
+function showNextImage() {
+  images[currentImageIndex].style.animation = '';
+  currentImageIndex = (currentImageIndex + 1) % images.length;
+  images[currentImageIndex].style.animation = 'fade 10s infinite';
+}
+setInterval(showNextImage, 10000);
+const headerTitle = document.getElementById('headerTitle');
+function rotateHeaderTitle() {
+  headerTitle.style.transform = `rotate(${Math.random() * 6 - 3}deg)`;
+}
+function openModal(imageSrc) {
+    const modal = document.getElementById('modal');
+    const modalImage = document.getElementById('modalImage');
+    const prevButton = document.getElementById('prevButton');
+    const nextButton = document.getElementById('nextButton');
+    currentPhotoIndex = allPhotos.findIndex(photo => photo.src === imageSrc);
+    modalImage.src = imageSrc;
+    modal.style.display = 'block';
+    modalImageIndex = Array.from(images).findIndex(image => image.src === imageSrc);
+    prevButton.onclick = () => changeModalImage(modalImageIndex - 1);
+    nextButton.onclick = () => changeModalImage(modalImageIndex + 1);
   }
-  function closeLightbox() {
-    document.getElementById('lightbox').style.display = 'none';
+  let modalImageIndex = 0;
+  function changeModalImage(offset) {
+    modalImageIndex += offset;
+    if (modalImageIndex < 0) {
+      modalImageIndex = images.length - 1;
+    } else if (modalImageIndex >= images.length) {
+      modalImageIndex = 0;
+    }
+    const modalImage = document.getElementById('modalImage');
+    modalImage.src = images[modalImageIndex].src;
   }
-  function prevImage() {
-    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-    updateLightboxContent();
+setInterval(rotateHeaderTitle, 1000);
+function openModal(imageSrc) {
+  const modal = document.getElementById('modal');
+  const modalImage = document.getElementById('modalImage');
+  modalImage.src = imageSrc;
+  modal.style.display = 'block';
+}
+window.onclick = function(event) {
+  const modal = document.getElementById('modal');
+  if (event.target === modal) {
+    modal.style.display = 'none';
   }
-  function nextImage() {
-    currentImageIndex = (currentImageIndex + 1) % images.length;
-    updateLightboxContent();
-  }
-  function updateLightboxContent() {
-    document.getElementById('lightboxImage').src = images[currentImageIndex];
-    document.getElementById('lightboxCaption').innerHTML = captions[currentImageIndex];
-    updateLightboxButtons();
-  }
-  function updateLightboxButtons() {
-    document.querySelector('.prev-button').style.display = currentImageIndex === 0 ? 'none' : 'block';
-    document.querySelector('.next-button').style.display = currentImageIndex === images.length - 1 ? 'none' : 'block';
-  }
+}

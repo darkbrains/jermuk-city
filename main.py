@@ -10,15 +10,15 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 @app.get('/api/healthz')
-def healthz(request: Request):
+async def healthz(request: Request):
     return templates.TemplateResponse("healthz.html", {"request": request})
 
 @app.get("/")
-def root():
+async def root():
     return RedirectResponse(url="/en")
 
 @app.get("/{language}")
-def home(request: Request, language: str):
+async def home(request: Request, language: str):
     valid_languages = ["en", "am", "ru"]
     if language not in valid_languages:
         return RedirectResponse(url="/en")
@@ -26,10 +26,10 @@ def home(request: Request, language: str):
     return templates.TemplateResponse(f"index_{language}.html", {"request": request})
 
 @app.get("/hotels/{language}")
-def home(request: Request, language: str):
+async def home(request: Request, language: str):
     valid_languages = ["en", "am", "ru"]
     if language not in valid_languages:
-        return RedirectResponse(url="/en")
+        return RedirectResponse(url="/hotels/en")
 
     return templates.TemplateResponse(f"hotels_{language}.html", {"request": request})
 
