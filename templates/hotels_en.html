@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" type="image/x-icon" href="/static/deer.png?v=3" />
+  <title>Jermuk</title>
+  <link rel="stylesheet" class="text/css" href="/static/hotels.css?v=3"/>
+</head>
+<body>
+  <div class="flying-lights"></div>
+  <div class="birds"></div>    
+  <header>
+    <a href="/en" class="no-underline">
+      <h1 id="headerTitle">Jermuk City</h1>
+    </a>
+    <div class="language-selection">
+        <button onmouseover="showLanguageOptions()" onmouseout="hideLanguageOptions()">Language</button>
+        <div class="language-options" onmouseover="showLanguageOptions()" onmouseout="hideLanguageOptions()">
+          <button onclick="changeLanguage('ARM')">Հայ</button>
+          <button onclick="changeLanguage('RUS')">Рус</button>
+          <button onclick="changeLanguage('ENG')">Eng</button>
+        </div>
+    </div>          
+    <nav>
+  </header>
+  <main>
+    <section id="hotelss">
+      <h2>Armenia Hotel and SPA</h2>
+      <p>
+        Armenia Hotel and SPA features a garden, terrace, a restaurant and bar in Jermuk. This 5-star hotel offers room service, a 24-hour front desk and free WiFi. The hotel has an indoor pool, sauna, evening entertainment and a shared lounge.
+      </p>
+      <p>
+        All rooms come with a flat-screen TV with satellite channels, fridge, an electric tea pot, a shower, free toiletries and a desk. The rooms include a private bathroom with a hairdryer, while selected rooms also feature a balcony and others also feature city views. Guest rooms have a safety deposit box.
+        A continental breakfast is available each morning at the hotel.
+      </p>
+      <p>
+        Armenia Hotel and SPA offers 5-star accommodations with a spa center and playground. You can play pool, ping pong and darts at this 5-star hotel, and the area is popular for skiing and cycling.
+      </p>
+      <p>
+        The nearest airport is Zvartnots International, 106 miles from the accommodation, and the property offers a paid airport shuttle service.
+      </p>
+      <div class="photo-gallery-hotels">
+        <div class="photo-item-hotels" onclick="openModal('/static/hotels/armenia/arm24.jpg?v=3')">
+          <img src="/static/hotels/armenia/arm24.jpg?v=3" alt="Photo 1">
+        </div>
+        <div class="photo-item-hotels" onclick="openModal('/static/hotels/armenia/arm20.jpg?v=3')">
+          <img src="/static/hotels/armenia/arm20.jpg?v=3" alt="Photo 2">
+        </div>
+        <div class="photo-item-hotels" onclick="openModal('/static/hotels/armenia/arm21.jpg?v=3')">
+          <img src="/static/hotels/armenia/arm21.jpg?v=3" alt="Photo 3">
+        </div>
+        <div class="photo-item-hotels" onclick="openModal('/static/hotels/armenia/arm6.jpg?v=3')">
+          <img src="/static/hotels/armenia/arm6.jpg?v=3" alt="Photo 4">
+        </div>
+        <div class="photo-item-hotels" onclick="openModal('/static/hotels/armenia/arm7.jpg?v=3')">
+          <img src="/static/hotels/armenia/arm7.jpg?v=3" alt="Photo 5">
+        </div>              
+        <div class="photo-item-hotels-more" onclick="openModal('/static/hotels/armenia/arm9.jpg?v=3')">
+          <img src="/static/hotels/armenia/arm9.jpg?v=3" alt="Photo 6" >
+          <div class="image-text">More Photos</div>
+        </div>             
+      </div>
+    </section>
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p>
+        For more information about Jermuk City, feel free to contact us:
+        <br>
+        <!-- Email: info@jermukcity.com -->
+        <br>
+        Phone: +374 94-77-11-39
+        <br>
+        <br>
+        Social Media:
+      </p>
+      <div class="contact-social-icons">
+        <a href="https://api.whatsapp.com/send?phone=37494771139" target="_blank">
+          <img src="/static/whatsapp.png?v=3" alt="WhatsApp">
+        </a>
+        <a href="https://www.facebook.com/varo.zaqaryan.3?mibextid=ZbWKwL" target="_blank">
+          <img src="/static/facebook.png?v=3" alt="Facebook">
+        </a>
+        <a href="https://t.me/+37494771139" target="_blank">
+          <img src="/static/telegram.png?v=3" alt="Telegram">
+        </a>
+        <a href="viber://chat?number=+37494771139" target="_blank">
+          <img src="/static/viber.png?v=3" alt="Viber">
+        </a>
+        <a href="https://instagram.com/_varo_tour_?igshid=MzRlODBiNWFlZA==" target="_blank">
+          <img src="/static/instagram.png?v=3" alt="Instagram">
+        </a>
+      </div>      
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2023 Jermuk City. All rights reserved.</p>
+  </footer>
+  <div id="modal" class="modal">
+    <span class="close">&times;</span>
+    <div class="modal-content">
+      <img id="modalImage" src="" alt="Modal Image">
+      <button id="prevButton" class="modal-button prev-button" onclick="changeModalImage(-1)">&#8249;</button>
+      <button id="nextButton" class="modal-button next-button" onclick="changeModalImage(1)">&#8250;</button>    
+    </div>
+  </div>  
+  <div class="flying-lights"></div>
+  <div class="birds"></div>
+  <div class="leaves"></div>
+  <script src="/static/hotels.js?v=3"></script>
+</body>
+</html>

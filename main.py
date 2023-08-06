@@ -25,5 +25,13 @@ def home(request: Request, language: str):
 
     return templates.TemplateResponse(f"index_{language}.html", {"request": request})
 
+@app.get("/hotels/{language}")
+def home(request: Request, language: str):
+    valid_languages = ["en", "am", "ru"]
+    if language not in valid_languages:
+        return RedirectResponse(url="/en")
+
+    return templates.TemplateResponse(f"hotels_{language}.html", {"request": request})
+
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8888)
