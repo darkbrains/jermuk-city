@@ -17,7 +17,7 @@ spec:
         env: aws         
     spec:       
       containers:
-      - image: docker.io/blackdocs/jermuk-city:ef1d628ca94d83e18546add78b77d69474aa8349
+      - image: docker.io/blackdocs/jermuk-city:649f8b990c6e0ff3a006e6ac69931fa64d6b8952
         name: jermuk-city
         imagePullPolicy: Always                
         resources: 
