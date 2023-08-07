@@ -90,7 +90,7 @@ metadata:
     cert-manager.io/cluster-issuer: production
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
-    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "false"
 spec:
   ingressClassName: nginx
   rules:
