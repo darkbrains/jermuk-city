@@ -1,3 +1,5 @@
+### Compose
+
 # services:
 #   jermuk-city:
 #     container_name: jermuk-city
@@ -15,22 +17,22 @@
 #     ports:
 #       - 8888:8888
 
+
+
+### Swarm Mode
+
 services:
   jermuk-city:
     deploy:
       replicas: 3  
       resources:
         limits:
-          cpus: 0.2
+          cpus: '0.2'
           memory: 128M
         reservations:
-          cpus: 0.1
+          cpus: '0.1'
           memory: 68M           
-    # container_name: linktree
     image: blackdocs/jermuk-city:649f8b990c6e0ff3a006e6ac69931fa64d6b8952
-    # mem_limit: 128m
-    # mem_reservation: 68M
-    # cpus: 0.2
     command:
      - uvicorn
      - main:app
@@ -40,8 +42,6 @@ services:
      - '0.0.0.0'
     ports:
       - 8888:8888
-    # env_file:
-    #   - .env
     networks:
       - ingress  
 networks:
