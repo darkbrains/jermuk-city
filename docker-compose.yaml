@@ -28,10 +28,10 @@ services:
       resources:
         limits:
           cpus: '0.2'
-          memory: 128M
+          memory: 80M
         reservations:
           cpus: '0.1'
-          memory: 68M
+          memory: 58M 
       restart_policy:
         condition: on-failure                      
     image: blackdocs/jermuk-city:649f8b990c6e0ff3a006e6ac69931fa64d6b8952
