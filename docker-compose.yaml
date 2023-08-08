@@ -16,7 +16,7 @@
 #       - 8888:8888
 
 services:
-  webapi:
+  jermuk-city:
     deploy:
       replicas: 3  
       resources:
