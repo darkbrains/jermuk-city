@@ -1,0 +1,16 @@
+services:
+  jermuk-city:
+    container_name: jermuk-city
+    image: blackdocs/jermuk-city:649f8b990c6e0ff3a006e6ac69931fa64d6b8952
+    mem_limit: 128m
+    mem_reservation: 68M
+    cpus: 0.2
+    command:
+     - uvicorn
+     - main:app
+     - '--port'
+     - '8888'
+     - '--host'
+     - '0.0.0.0'
+    ports:
+      - 8888:8888
