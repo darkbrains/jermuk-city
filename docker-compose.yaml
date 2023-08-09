@@ -64,9 +64,18 @@ services:
     image: blackdocs/jermuk-city:nodejsv1
     labels:
       logging: "promtail"
-      logging_jobname: "containerlogs"    
+      logging_jobname: "containerlogs"
+      app: "jermuk-city"    
     command:
      - node
      - node.js
     ports:
       - 8888:8888
+    networks:
+      - aws
+
+networks:
+  ingress:
+    external: true
+  aws:
+    external: true   
