@@ -54,10 +54,10 @@ services:
       replicas: 3  
       resources:
         limits:
-          cpus: '0.2'
+          cpus: '0.08'
           memory: 80M
         reservations:
-          cpus: '0.1'
+          cpus: '0.05'
           memory: 58M 
       restart_policy:
         condition: on-failure                      
