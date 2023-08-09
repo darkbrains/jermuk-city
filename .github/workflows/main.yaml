@@ -1,7 +1,7 @@
 name: Build and Deploy Jermuk-City app
 on:
   push:
-    branches: [ main ]
+    branches: [ dev ]
 jobs:
   build-and-deploy:
     runs-on: self-hosted
