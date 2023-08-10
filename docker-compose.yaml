@@ -51,7 +51,7 @@
 services:
   jermuk-city:
     deploy:
-      replicas: 3  
+      replicas: 2 
       resources:
         limits:
           cpus: '0.08'
