@@ -14,7 +14,7 @@ spec:
   source:
     repoURL: git@github.com:Blackdocs-Cloud/jermuk-city.git
     targetRevision: main
-    path: ./
+    path: ./k8s
   destination:
     server: https://kubernetes.default.svc
     namespace: jermuk-city

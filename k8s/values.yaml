@@ -107,7 +107,7 @@ spec:
   tls:
   - hosts:
       - "*.jermuk.city"
-    secretName: operations/jermuk.city           
+    secretName: jermuk.city           
 
 ---
 
