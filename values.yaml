@@ -22,11 +22,11 @@ spec:
         imagePullPolicy: Always                
         resources: 
           requests:
-            memory: "68Mi"
-            cpu: "10m"
+            memory: "30Mi"
+            cpu: "5m"
           limits:
             memory: "72Mi"
-            cpu: "30m"                  
+            cpu: "10m"                  
         ports:
           - containerPort: 8888
             name: http-svc   
@@ -87,8 +87,8 @@ metadata:
   name: jermuk-city-ingress
   namespace: jermuk-city
   annotations:
-    cert-manager.io/cluster-issuer: production
-    kubernetes.io/tls-acme: "true"
+    # cert-manager.io/cluster-issuer: production
+    # kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
     nginx.ingress.kubernetes.io/ssl-passthrough: "false"
 spec:
@@ -107,7 +107,7 @@ spec:
   tls:
   - hosts:
       - "*.jermuk.city"
-    secretName: jermuk.city           
+    secretName: operations/jermuk.city           
 
 ---
 
@@ -124,8 +124,8 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: jermuk-city
-  minReplicas: 2
-  maxReplicas: 6
+  minReplicas: 1
+  maxReplicas: 4
   metrics:     
   - type: Resource
     resource:

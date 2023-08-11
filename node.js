@@ -3,7 +3,20 @@ const path = require('path');
 const fs = require('fs').promises;
 
 const app = express();
-const port = process.env.PORT || 8888;
+const port = process.env.PORT || 8881;
+
+
+const Pyroscope = require('@pyroscope/nodejs');
+
+Pyroscope.init({
+  serverAddress: 'http://pyroscope:4040',
+  appName: 'myNodeService',
+  tags: {
+    envir: 'test'
+  },  
+});
+
+Pyroscope.start()
 
 function logRequest(req, res, timer) {
     const timestamp = new Date().toISOString();

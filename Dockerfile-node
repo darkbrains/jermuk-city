@@ -3,6 +3,6 @@ WORKDIR /app
 COPY ./templates templates/
 COPY ./static static/
 COPY node.js .
-RUN npm install npm install express path chalk ejs
+RUN npm install npm install express path chalk ejs @pyroscope/nodejs
 EXPOSE 8888
 CMD [ "node", "node.js" ]

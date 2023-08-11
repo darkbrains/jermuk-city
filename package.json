@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@pyroscope/nodejs": "^0.2.6",
     "chalk": "^5.3.0",
     "ejs": "^3.1.9",
     "express": "^4.18.2",

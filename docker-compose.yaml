@@ -50,18 +50,18 @@
 
 services:
   jermuk-city:
-    deploy:
-      replicas: 2 
-      resources:
-        limits:
-          cpus: '0.08'
-          memory: 80M
-        reservations:
-          cpus: '0.05'
-          memory: 58M 
-      restart_policy:
-        condition: on-failure                      
-    image: blackdocs/jermuk-city:nodejsv1
+    # deploy:
+    #   replicas: 2 
+    #   resources:
+    #     limits:
+    #       cpus: '0.08'
+    #       memory: 80M
+    #     reservations:
+    #       cpus: '0.05'
+    #       memory: 58M 
+    #   restart_policy:
+    #     condition: on-failure                      
+    image: pyrscope:node
     labels:
       logging: "promtail"
       logging_jobname: "containerlogs"
@@ -70,12 +70,12 @@ services:
      - node
      - node.js
     ports:
-      - 8888:8888
-    networks:
-      - aws
+      - 8887:8881
+#     networks:
+#       - aws
 
-networks:
-  ingress:
-    external: true
-  aws:
-    external: true   
+# networks:
+#   ingress:
+#     external: true
+#   aws:
+#     external: true   

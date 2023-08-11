@@ -8,7 +8,7 @@ metadata:
     notifications.argoproj.io/subscribe.on-sync-status-unknown.slack: alerts
     notifications.argoproj.io/subscribe.on-sync-succeeded.slack: alerts
   name: jermuk-city
-  namespace: argo-cd
+  namespace: operations
 spec:
   project: default
   source:
