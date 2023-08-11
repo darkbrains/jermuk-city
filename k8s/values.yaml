@@ -17,7 +17,7 @@ spec:
         env: aws         
     spec:       
       containers:
-      - image: docker.io/blackdocs/jermuk-city:latest
+      - image: docker.io/blackdocs/jermuk-city:nodejsv1
         name: jermuk-city
         imagePullPolicy: Always                
         resources: 
@@ -30,10 +30,9 @@ spec:
         ports:
           - containerPort: 8888
             name: http-svc   
-        command:
-          - node
-        args:
-          - node.js        
+        # command:
+        #   - uvicorn
+        # args:      
           # - main:app
           # - '--host'
           # - '0.0.0.0'

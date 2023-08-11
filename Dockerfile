@@ -1,8 +1,8 @@
-FROM python:3.10-slim
+FROM node:18
 WORKDIR /app
 COPY ./templates templates/
 COPY ./static static/
-COPY main.py .
-COPY requirements.txt .
-RUN pip install -r requirements.txt
+COPY node.js .
+RUN npm install express path chalk ejs 
 EXPOSE 8888
+CMD [ "node", "node.js" ]
