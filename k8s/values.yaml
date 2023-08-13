@@ -5,7 +5,7 @@ metadata:
     app: jermuk-city
     env: aws      
   name: jermuk-city
-  namespace: jermuk-city
+  namespace: webapps
 spec:
   selector:
     matchLabels:
@@ -69,7 +69,7 @@ metadata:
   labels:
     app: jermuk-city  
     env: aws  
-  namespace: jermuk-city    
+  namespace: webapps
 spec:
   selector:
     app: jermuk-city
@@ -85,7 +85,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: jermuk-city-ingress
-  namespace: jermuk-city
+  namespace: webapps
   annotations:
     # cert-manager.io/cluster-issuer: production
     # kubernetes.io/tls-acme: "true"
@@ -115,7 +115,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: jermuk-city-autoscale
-  namespace: jermuk-city
+  namespace: webapps
   labels:
     app: jermuk-city
     env: aws  
