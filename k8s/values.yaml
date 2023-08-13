@@ -30,6 +30,10 @@ spec:
         ports:
           - containerPort: 8888
             name: http-svc   
+        command:
+          - node
+        args:
+          - node.js    
         # command:
         #   - uvicorn
         # args:      

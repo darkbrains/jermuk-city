@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:16.20.1-alpine3.18
 WORKDIR /app
 COPY ./templates templates/
 COPY ./static static/
