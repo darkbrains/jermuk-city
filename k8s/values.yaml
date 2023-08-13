@@ -31,7 +31,7 @@ spec:
           - containerPort: 8888
             name: http-svc   
         command:
-          - node
+          - /usr/bin/node
         args:
           - node.js    
         # command:
