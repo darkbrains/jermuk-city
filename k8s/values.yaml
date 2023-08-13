@@ -29,11 +29,7 @@ spec:
             cpu: "10m"                  
         ports:
           - containerPort: 8888
-            name: http-svc   
-        command:
-          - /usr/bin/node
-        args:
-          - node.js    
+            name: http-svc     
         # command:
         #   - uvicorn
         # args:      
