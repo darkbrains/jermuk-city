@@ -4,8 +4,8 @@ on:
     - cron: "*/5 * * * *"
 
 jobs:
-  check_release: self-hosted
-    runs-on: 
+  check_release: 
+    runs-on: self-hosted
     steps:
       - name: Checkout Repo jermuk-ctiy
         uses: actions/checkout@v2
