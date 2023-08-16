@@ -32,47 +32,23 @@
 
 
 
-name: Check for New Releases
-on:
-  schedule:
-    - cron: '*/2 * * * *'
+name: First Cron Job
 
+       # Controls when the workflow will run
+on:
+  # Triggers the workflow every 5 minutes
+  schedule:
+    - cron: "*/2 * * * *"
+
+     # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  check-releases:
+  # This workflow contains a single job called "cron"
+  cron:
+    # The type of runner that the job will run on
     runs-on: self-hosted
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Get latest release version
-        id: get-version
-        run: |
-          latest_version=$(curl -s https://api.github.com/repos/Blackdocs-Cloud/webapps/releases/latest | jq -r ".tag_name")
-          echo "$latest_version" > latest-release.txt
-
-      - name: Read previous release version
-        id: read-previous-version
-        run: echo "::set-output name=previous_version::$(cat latest-release.txt || echo '')"
-
-      - name: Compare release versions
-        id: compare-versions
-        run: |
-          latest_version=$(cat latest-release.txt)
-          previous_version=${{ steps.read-previous-version.outputs.previous_version }}
-
-          if [ "$latest_version" != "$previous_version" ]; then
-            echo "There are new releases!"
-            echo "::set-output name=new_releases::true"
-          else
-            echo "There are no new releases."
-            echo "::set-output name=new_releases::false"
-          fi
-
-      - name: Use the result
-        run: |
-          if [[ "${{ steps.compare-versions.outputs.new_releases }}" == "true" ]]; then
-            echo "New releases are available!"
-          else
-            echo "No new releases."
-          fi
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
