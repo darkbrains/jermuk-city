@@ -13,7 +13,7 @@ jobs:
       - name: Get latest release tag
         id: get_release
         run: |
-          latest_tag=$(git describe --abbrev=0 --tags)
+          latest_tag=$(git describe --always --abbrev=0 --tags)
           echo "::set-output name=tag::$latest_tag"
 
       - name: Dispatch event to Repo webapps
