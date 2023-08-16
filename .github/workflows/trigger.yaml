@@ -1,7 +1,7 @@
 name: Check for New Release and Trigger Repo webapps
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/2 * * * *"
 
 jobs:
   check_release: 
