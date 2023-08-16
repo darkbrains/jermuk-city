@@ -1,31 +1,78 @@
-name: Build and Deploy Jermuk-City app
+# name: Build and Deploy Jermuk-City app
+# on:
+#   push:
+#     branches: [ dev ]
+# jobs:
+#   build-and-deploy:
+#     runs-on: self-hosted
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3  
+#       - name: Log in to Docker Hub
+#         uses: docker/login-action@v1
+#         with:
+#           username: ${{ secrets.DOCKER_USERNAME }}
+#           password: ${{ secrets.DOCKER_PASSWORD }}
+#       - name: Build Image
+#         run: |
+#           docker image build -t blackdocs/jermuk-city:${{ github.sha }} ./ 
+#       - name: Push Image
+#         run: |
+#           docker image push   blackdocs/jermuk-city:${{ github.sha }}                      
+#       - name: Replace image tag in values.yaml
+#         run: |
+#           sed -i "s|docker.io/blackdocs/jermuk-city:[^ ]*|docker.io/blackdocs/jermuk-city:${{ github.sha }}|" ./values.yaml
+#       - name: Commit and push changes
+#         run: |
+#           git config user.name "blackdocs"
+#           git config user.email "blackdocs@users.noreply.github.com"
+#           git add .
+#           git commit -m "Update image tag to ${GITHUB_SHA}"
+#           git push           
+
+
+
+name: Check for New Releases
 on:
-  push:
-    branches: [ dev ]
+  schedule:
+    - cron: '*/2 * * * *'
+
 jobs:
-  build-and-deploy:
+  check-releases:
     runs-on: self-hosted
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3  
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Build Image
+        uses: actions/checkout@v2
+
+      - name: Get latest release version
+        id: get-version
         run: |
-          docker image build -t blackdocs/jermuk-city:${{ github.sha }} ./ 
-      - name: Push Image
+          latest_version=$(curl -s https://api.github.com/repos/Blackdocs-Cloud/webapps/releases/latest | jq -r ".tag_name")
+          echo "$latest_version" > latest-release.txt
+
+      - name: Read previous release version
+        id: read-previous-version
+        run: echo "::set-output name=previous_version::$(cat latest-release.txt || echo '')"
+
+      - name: Compare release versions
+        id: compare-versions
         run: |
-          docker image push   blackdocs/jermuk-city:${{ github.sha }}                      
-      - name: Replace image tag in values.yaml
+          latest_version=$(cat latest-release.txt)
+          previous_version=${{ steps.read-previous-version.outputs.previous_version }}
+
+          if [ "$latest_version" != "$previous_version" ]; then
+            echo "There are new releases!"
+            echo "::set-output name=new_releases::true"
+          else
+            echo "There are no new releases."
+            echo "::set-output name=new_releases::false"
+          fi
+
+      - name: Use the result
         run: |
-          sed -i "s|docker.io/blackdocs/jermuk-city:[^ ]*|docker.io/blackdocs/jermuk-city:${{ github.sha }}|" ./values.yaml
-      - name: Commit and push changes
-        run: |
-          git config user.name "blackdocs"
-          git config user.email "blackdocs@users.noreply.github.com"
-          git add .
-          git commit -m "Update image tag to ${GITHUB_SHA}"
-          git push           
+          if [[ "${{ steps.compare-versions.outputs.new_releases }}" == "true" ]]; then
+            echo "New releases are available!"
+          else
+            echo "No new releases."
+          fi
