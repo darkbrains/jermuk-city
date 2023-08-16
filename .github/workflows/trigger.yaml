@@ -19,7 +19,7 @@ jobs:
       - name: Dispatch event to Repo webapps
         uses: peter-evans/repository-dispatch@v2
         with:
-          # token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.TOKEN_GITHUB }}
           repository: Blackdocs-Cloud/webapps
           event-type: new-release
           client-payload: '{"tag": "${{ steps.get_release.outputs.tag }}"}'           
