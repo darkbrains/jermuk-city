@@ -8,7 +8,6 @@ on:
 jobs:
 jobs:
 if: github.event.pull_request.merged == true
-  build-and-deploy:
     runs-on: self-hosted
     steps:
       - name: Checkout code
