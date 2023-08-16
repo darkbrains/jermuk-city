@@ -17,7 +17,7 @@ jobs:
           echo "::set-output name=release_tag::$latest_release"
 
       - name: Trigger Second Repository Workflow
-        uses: peter-evans/workflow-dispatch@v2
+        uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ secrets.TOKEN_GITHUB }}
           repository: Blackdocs-Cloud/webapps
