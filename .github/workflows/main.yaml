@@ -16,7 +16,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2          
       - name: Build and push
-        uses: docker/build-push-action@v4
+        # uses: docker/build-push-action@v4
         run: |
           docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t blackdocs/jermuk-city:${{ github.sha }} ./ 
           docker image push   blackdocs/jermuk-city:${{ github.sha }}                      
