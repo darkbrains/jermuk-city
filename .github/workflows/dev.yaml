@@ -1,13 +1,8 @@
-name: Build and Deploy Jermuk-City app on Prod
+name: Build and Deploy Jermuk-City app in dev
 on:
-on:
-  pull_request:
-    branches:
-      - main
-    types: [closed]
+  push:
+    branches: [ dev ]
 jobs:
-jobs:
-if: github.event.pull_request.merged == true
   build-and-deploy:
     runs-on: self-hosted
     steps:
