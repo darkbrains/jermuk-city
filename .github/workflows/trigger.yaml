@@ -1,31 +1,31 @@
-name: Check for New Release and Trigger Repo webapps
-on:
-  release:
-    types:
-      - created
-  schedule:
-    - cron: "*/5 * * * *"
+# name: Check for New Release and Trigger Repo webapps
+# on:
+#   release:
+#     types:
+#       - created
+#   schedule:
+#     - cron: "*/5 * * * *"
 
-jobs:
-  check_release: 
-    runs-on: self-hosted
-    steps:
-      - name: Checkout Repo jermuk-ctiy
-        uses: actions/checkout@v2
+# jobs:
+#   check_release: 
+#     runs-on: self-hosted
+#     steps:
+#       - name: Checkout Repo jermuk-ctiy
+#         uses: actions/checkout@v2
 
-      - name: Get latest release tag
-        id: get_release
-        run: |
-          latest_tag=$(git describe --always --abbrev=0 --tags)
-          echo "::set-output name=tag::$latest_tag"
+#       - name: Get latest release tag
+#         id: get_release
+#         run: |
+#           latest_tag=$(git describe --always --abbrev=0 --tags)
+#           echo "::set-output name=tag::$latest_tag"
 
-      - name: Dispatch event to Repo webapps
-        uses: peter-evans/repository-dispatch@v2
-        with:
-          token: ${{ secrets.TOKEN_GITHUB }}
-          repository: Blackdocs-Cloud/webapps
-          event-type: new-release
-          client-payload: '{"release_tag": "${{ steps.get_release.outputs.tag }}"}'           
+#       - name: Dispatch event to Repo webapps
+#         uses: peter-evans/repository-dispatch@v2
+#         with:
+#           token: ${{ secrets.TOKEN_GITHUB }}
+#           repository: Blackdocs-Cloud/webapps
+#           event-type: new-release
+#           client-payload: '{"release_tag": "${{ steps.get_release.outputs.tag }}"}'           
 
 
 
