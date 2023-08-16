@@ -18,8 +18,7 @@ jobs:
       - name: Build and push
         # uses: docker/build-push-action@v4
         run: |
-          docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t blackdocs/jermuk-city:${{ github.sha }} ./ 
-          docker image push   blackdocs/jermuk-city:${{ github.sha }}                      
+          docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t blackdocs/jermuk-city:${{ github.sha }} ./ --push                      
       - name: Replace image tag in values.yaml
         run: |
           sed -i "s|docker.io/blackdocs/jermuk-city:[^ ]*|docker.io/blackdocs/jermuk-city:${{ github.sha }}|" ./values.yaml
