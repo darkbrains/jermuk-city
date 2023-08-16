@@ -15,7 +15,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Image
         run: |
-          docker buildx create --use
+          docker buildx --use default
           docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t blackdocs/jermuk-city:${{ github.sha }} ./ 
       - name: Push Image
         run: |
