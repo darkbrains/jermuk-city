@@ -6,8 +6,8 @@ on:
       - main
     types: [closed]
 jobs:
-jobs:
-if: github.event.pull_request.merged == true
+  build-and-deploy:
+    if: github.event.pull_request.merged == true
     runs-on: self-hosted
     steps:
       - name: Checkout code
