@@ -24,15 +24,8 @@ jobs:
         with:
           token: ${{ secrets.TOKEN_GITHUB }}
           repository: Blackdocs-Cloud/webapps
-          workflow: your-workflow-name
-          inputs: |
-            {
-              "release_tag": "${{ steps.get_release.outputs.release_tag }}"
-            }        
-          # token: ${{ secrets.TOKEN_GITHUB }}
-          # repository: Blackdocs-Cloud/webapps
-          # event-type: new-release
-          # client-payload: '{"release_tag": "${{ steps.get_release.outputs.tag }}"}'           
+          event-type: new-release
+          client-payload: '{"release_tag": "${{ steps.get_release.outputs.tag }}"}'           
 
 
 
