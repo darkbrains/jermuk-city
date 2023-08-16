@@ -30,31 +30,31 @@ jobs:
           git commit -m "Update image tag to ${GITHUB_SHA}"
           git push          
 
----
+# ---
 
-name: Check for New Release and Trigger Repo webapps
+# name: Check for New Release and Trigger Repo webapps
 
-on:
-  schedule:
-    - cron: "*/5 * * * *"
+# on:
+#   schedule:
+#     - cron: "*/5 * * * *"
 
-jobs:
-  check_release: self-hosted
-    runs-on: 
-    steps:
-      - name: Checkout Repo jermuk-ctiy
-        uses: actions/checkout@v2
+# jobs:
+#   check_release: self-hosted
+#     runs-on: 
+#     steps:
+#       - name: Checkout Repo jermuk-ctiy
+#         uses: actions/checkout@v2
 
-      - name: Get latest release tag
-        id: get_release
-        run: |
-          latest_tag=$(git describe --abbrev=0 --tags)
-          echo "::set-output name=tag::$latest_tag"
+#       - name: Get latest release tag
+#         id: get_release
+#         run: |
+#           latest_tag=$(git describe --abbrev=0 --tags)
+#           echo "::set-output name=tag::$latest_tag"
 
-      - name: Dispatch event to Repo webapps
-        uses: peter-evans/repository-dispatch@v2
-        with:
-          # token: ${{ secrets.GITHUB_TOKEN }}
-          repository: Blackdocs-Cloud/webapps
-          event-type: new-release
-          client-payload: '{"tag": "${{ steps.get_release.outputs.tag }}"}'           
+#       - name: Dispatch event to Repo webapps
+#         uses: peter-evans/repository-dispatch@v2
+#         with:
+#           # token: ${{ secrets.GITHUB_TOKEN }}
+#           repository: Blackdocs-Cloud/webapps
+#           event-type: new-release
+#           client-payload: '{"tag": "${{ steps.get_release.outputs.tag }}"}'           
