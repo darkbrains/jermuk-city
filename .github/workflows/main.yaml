@@ -1,7 +1,7 @@
 name: Build and Deploy Jermuk-City app
 on:
   push:
-    branches: [ main ]
+    branches: [ dev ]
 jobs:
   build-and-deploy:
     runs-on: self-hosted
@@ -28,4 +28,33 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           git add .
           git commit -m "Update image tag to ${GITHUB_SHA}"
-          git push           
+          git push          
+
+---
+
+name: Check for New Release and Trigger Repo webapps
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+
+jobs:
+  check_release: self-hosted
+    runs-on: 
+    steps:
+      - name: Checkout Repo jermuk-ctiy
+        uses: actions/checkout@v2
+
+      - name: Get latest release tag
+        id: get_release
+        run: |
+          latest_tag=$(git describe --abbrev=0 --tags)
+          echo "::set-output name=tag::$latest_tag"
+
+      - name: Dispatch event to Repo webapps
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          # token: ${{ secrets.GITHUB_TOKEN }}
+          repository: Blackdocs-Cloud/webapps
+          event-type: new-release
+          client-payload: '{"tag": "${{ steps.get_release.outputs.tag }}"}'           
