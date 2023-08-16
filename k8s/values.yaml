@@ -23,10 +23,10 @@ spec:
         resources: 
           requests:
             memory: "30Mi"
-            cpu: "5m"
+            cpu: "10m"
           limits:
             memory: "72Mi"
-            cpu: "10m"                  
+            cpu: "20m"                  
         ports:
           - containerPort: 8888
             name: http-svc     
