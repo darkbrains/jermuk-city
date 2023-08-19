@@ -23,10 +23,10 @@ spec:
         resources: 
           requests:
             memory: "30Mi"
-            cpu: "10m"
+            cpu: "5m"
           limits:
             memory: "72Mi"
-            cpu: "20m"                  
+            cpu: "30m"                  
         ports:
           - containerPort: 8888
             name: http-svc     
@@ -125,7 +125,7 @@ spec:
     kind: Deployment
     name: jermuk-city
   minReplicas: 2
-  maxReplicas: 4
+  maxReplicas: 3
   metrics:     
   - type: Resource
     resource:
@@ -133,3 +133,9 @@ spec:
       target:
         type: Utilization
         averageUtilization: 90
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 90 
