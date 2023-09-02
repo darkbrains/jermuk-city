@@ -1,19 +1,17 @@
-FROM node:16.20.1-alpine3.18 AS builder
+FROM node:16.20.1-alpine3.18
 
 WORKDIR /app
 
 COPY ./templates templates/
 COPY ./static static/
 COPY node.js .
+COPY package*.json .
+COPY logger.js .
+COPY httpLogger.js .
 
-RUN npm install express path chalk ejs
+RUN npm install
 
-FROM node:16.20.1-alpine3.18
 
-WORKDIR /app
-
-COPY --from=builder /app /app
-
-EXPOSE 8888
+EXPOSE 3000
 
 CMD [ "node", "node.js" ]
