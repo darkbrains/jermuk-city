@@ -1,81 +1,22 @@
-### Compose
-
-# services:
-#   jermuk-city:
-#     container_name: jermuk-city
-#     image: blackdocs/jermuk-city:649f8b990c6e0ff3a006e6ac69931fa64d6b8952
-#     mem_limit: 128m
-#     mem_reservation: 68M
-#     cpus: 0.2
-#     command:
-#      - uvicorn
-#      - main:app
-#      - '--port'
-#      - '8888'
-#      - '--host'
-#      - '0.0.0.0'
-#     ports:
-#       - 8888:8888
-
-
-
-### Swarm Mode Python
-
-# services:
-#   jermuk-city:
-#     deploy:
-#       replicas: 3  
-#       resources:
-#         limits:
-#           cpus: '0.2'
-#           memory: 80M
-#         reservations:
-#           cpus: '0.1'
-#           memory: 58M 
-#       restart_policy:
-#         condition: on-failure                      
-#     image: blackdocs/jermuk-city:649f8b990c6e0ff3a006e6ac69931fa64d6b8952
-#     command:
-#      - uvicorn
-#      - main:app
-#      - '--port'
-#      - '8888'
-#      - '--host'
-#      - '0.0.0.0'
-#     ports:
-#       - 8888:8888
-
-
-### Swarm Mode Node JS
+### Docker compose
 
 services:
-  jermuk-city:
-    # deploy:
-    #   replicas: 2 
-    #   resources:
-    #     limits:
-    #       cpus: '0.08'
-    #       memory: 80M
-    #     reservations:
-    #       cpus: '0.05'
-    #       memory: 58M 
-    #   restart_policy:
-    #     condition: on-failure                      
-    image: pyrscope:node
+  jermuk-city:                   
+    image: docker.io/blackdocs/jermuk-city:1ac91f2a9d08e7650247c1b670aae9c1d83e96d1
     labels:
       logging: "promtail"
       logging_jobname: "containerlogs"
-      app: "jermuk-city"    
+      app: "jermuk-city"
+    mem_limit: "150m"
+    mem_reservation: "72m"
+    cpus: "0.1"    
     command:
      - node
      - node.js
     ports:
-      - 8887:8881
-#     networks:
-#       - aws
-
-# networks:
-#   ingress:
-#     external: true
-#   aws:
-#     external: true   
+      - 8888:8888
+    networks:
+      - aws      
+networks:
+  aws:
+    external: true   
