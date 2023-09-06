@@ -4,6 +4,8 @@ on:
     branches:
       - main
     types: [closed]
+  push:
+    branches: [ main ]    
 jobs:
   build-and-deploy:
     if: github.event.pull_request.merged == true
