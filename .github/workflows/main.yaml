@@ -1,9 +1,9 @@
 name: Build and Deploy Jermuk-City app on Prod
 on:
-  pull_request:
-    branches:
-      - main
-    types: [closed]
+  # pull_request:
+  #   branches:
+  #     - main
+  #   types: [closed]
   push:
     branches: [ main ]    
 jobs:
