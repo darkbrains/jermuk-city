@@ -28,7 +28,7 @@ jobs:
       - name: Replace image tag 
         run: |
           sed -i "s|docker.io/blackdocs/jermuk-city:[^ ]*|docker.io/blackdocs/jermuk-city:${{ github.sha }}|" docker-compose.yaml
-        working-directory: ./path/to/target/repo
+        working-directory: ./
 
       - name: Commit and push changes
         run: |
