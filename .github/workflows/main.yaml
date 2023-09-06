@@ -14,13 +14,10 @@ jobs:
         with:
           registry: docker.io
           username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2          
+          password: ${{ secrets.DOCKER_PASSWORD }}        
       - name: Build and push
-        # uses: docker/build-push-action@v4
         run: |
-          sudo docker buildx build --platform linux/amd64,linux/arm64 -t blackdocs/jermuk-city:${{ github.sha }} ./ --push                      
+          sudo docker build -t blackdocs/jermuk-city:${{ github.sha }} ./ --push                      
       - name: Replace image tag in values.yaml
         run: |
           sed -i "s|docker.io/blackdocs/jermuk-city:[^ ]*|docker.io/blackdocs/jermuk-city:${{ github.sha }}|" ./k8s/values.yaml
