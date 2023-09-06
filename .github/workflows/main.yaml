@@ -23,8 +23,7 @@ jobs:
         with:
           repository: Blackdocs-Cloud/docker-apps
           ref: main 
-        env:
-          GH_PAT: ${{ secrets.TOKEN_GITHUB }}          
+          token: ${{ secrets.TOKEN_GITHUB }}          
 
       - name: Replace image tag 
         run: |
