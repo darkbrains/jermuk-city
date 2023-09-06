@@ -17,14 +17,33 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}        
       - name: Build and push
         run: |
-          docker build -t blackdocs/jermuk-city:${{ github.sha }} ./ --push                      
-      - name: Replace image tag in values.yaml
+          docker build -t blackdocs/jermuk-city:${{ github.sha }} ./ --push      
+      - name: Checkout target repository
+        uses: actions/checkout@v2
+        with:
+          repository: Blackdocs-Cloud/docker-apps
+          ref: main 
+
+      - name: Replace image tag 
         run: |
-          sed -i "s|docker.io/blackdocs/jermuk-city:[^ ]*|docker.io/blackdocs/jermuk-city:${{ github.sha }}|" ./k8s/values.yaml
+          sed -i "s|docker.io/blackdocs/jermuk-city:[^ ]*|docker.io/blackdocs/jermuk-city:${{ github.sha }}|" docker-compose.yaml
+        working-directory: ./path/to/target/repo
+
       - name: Commit and push changes
         run: |
-          git config user.name "actions"
-          git config user.email "actions@users.noreply.github.com"
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
           git add .
-          git commit -m "Update image tag to ${GITHUB_SHA}"
-          git push          
+          git commit -m "Update image tag"
+          git push origin main         
+
+      # - name: Replace image tag in values.yaml
+      #   run: |
+      #     sed -i "s|docker.io/blackdocs/jermuk-city:[^ ]*|docker.io/blackdocs/jermuk-city:${{ github.sha }}|" ./k8s/values.yaml
+      # - name: Commit and push changes
+      #   run: |
+      #     git config user.name "actions"
+      #     git config user.email "actions@users.noreply.github.com"
+      #     git add .
+      #     git commit -m "Update image tag to ${GITHUB_SHA}"
+      #     git push          
