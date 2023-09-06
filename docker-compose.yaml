@@ -1,22 +1,14 @@
-### Docker compose
-
 services:
-  jermuk-city:                   
-    image: docker.io/blackdocs/jermuk-city:1ac91f2a9d08e7650247c1b670aae9c1d83e96d1
+  jermuk-city-local:                   
+    image: blackdocs/jermuk-cety:stable-latest
     labels:
       logging: "promtail"
       logging_jobname: "containerlogs"
-      app: "jermuk-city"
-    mem_limit: "150m"
-    mem_reservation: "72m"
-    cpus: "0.1"    
-    command:
-     - node
-     - node.js
+      app: "jermuk-city-local"
     ports:
       - 8888:8888
     networks:
       - aws      
 networks:
   aws:
-    external: true   
+    external: true
