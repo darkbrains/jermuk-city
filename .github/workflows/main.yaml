@@ -21,7 +21,7 @@ jobs:
       - name: Checkout target repository
         uses: actions/checkout@v2
         with:
-          repository: Blackdocs-Cloud/docker-apps
+          repository: https://github.com/Blackdocs-Cloud/docker-apps.git
           ref: main 
 
       - name: Replace image tag 
