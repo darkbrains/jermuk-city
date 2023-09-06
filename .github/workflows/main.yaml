@@ -21,8 +21,10 @@ jobs:
       - name: Checkout target repository
         uses: actions/checkout@v2
         with:
-          repository: https://github.com/Blackdocs-Cloud/docker-apps.git
+          repository: Blackdocs-Cloud/docker-apps
           ref: main 
+        env:
+          GH_PAT: ${{ secrets.TOKEN_GITHUB }}          
 
       - name: Replace image tag 
         run: |
