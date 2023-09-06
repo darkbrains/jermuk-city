@@ -1,19 +1,12 @@
-FROM node:16.20.1-alpine3.18 AS builder
+FROM docker.io/library/nginx:latest
 
-WORKDIR /app
-
-COPY ./templates templates/
-COPY ./static static/
-COPY node.js .
-
-RUN npm install express path chalk ejs
-
-FROM node:16.20.1-alpine3.18
-
-WORKDIR /app
-
-COPY --from=builder /app /app
+COPY ./templates /usr/share/nginx/html/templates
+COPY ./static /usr/share/nginx/html/static
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./mime.types /etc/nginx/mime.types
+RUN chmod -R 777 /usr/share/nginx
+RUN chmod -R 777 /etc/nginx/mime.types
 
 EXPOSE 8888
 
-CMD [ "node", "node.js" ]
+CMD ["nginx", "-g", "daemon off;"]
