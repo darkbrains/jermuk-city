@@ -5,7 +5,7 @@ on:
       - main
     types: [closed]  
 jobs:
-  build-docker-image:
+  jermuk-city-ci:
     if: github.event.pull_request.merged == true
     runs-on: self-hosted
     steps:
@@ -27,7 +27,20 @@ jobs:
         with:
           repository: Blackdocs-Cloud/docker-apps
           ref: main 
-          token: ${{ secrets.TOKEN_GITHUB }} 
+          token: ${{ secrets.TOKEN_GITHUB }}                   
+
+      - name: Delever to docker-apps 
+        run: |
+          sed -i "s|docker.io/blackdocs/jermuk-city:[^ ]*|docker.io/blackdocs/jermuk-city:${{ github.sha }}|" docker-compose.yaml
+        working-directory: ./
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Update image tag to ${GITHUB_SHA}"
+          git push origin main   
 
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@v2
@@ -40,21 +53,4 @@ jobs:
           SLACK_MESSAGE: ${{ steps.set-slack-message.outputs.message }}
           SLACK_TITLE: jermuk-city CI
           SLACK_USERNAME: GitHub Bot
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}                   
-
-  delever-to-docker-apps:
-    needs: build-docker-image
-    runs-on: self-hosted
-    steps:
-      - name: Replace image tag 
-        run: |
-          sed -i "s|docker.io/blackdocs/jermuk-city:[^ ]*|docker.io/blackdocs/jermuk-city:${{ github.sha }}|" docker-compose.yaml
-        working-directory: ./
-
-      - name: Commit and push changes
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add .
-          git commit -m "Update image tag to ${GITHUB_SHA}"
-          git push origin main   
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
