@@ -27,7 +27,7 @@ jobs:
         with:
           repository: Blackdocs-Cloud/docker-apps
           ref: main 
-          token: ${{ secrets.TOKEN_GITHUB }} 
+          token: ${{ secrets.TOKEN_GITHUB }}                   
 
       - name: Delever to docker-apps 
         run: |
