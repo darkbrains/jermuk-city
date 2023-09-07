@@ -10,7 +10,7 @@ COPY ./mime.types /etc/nginx/mime.types
 
 RUN chmod -R 777 /usr/share/nginx
 
-RUN chomd -R 777 /etc/nginx/mime.types
+RUN chmod -R 777 /etc/nginx/mime.types
 
 EXPOSE 8888
 
