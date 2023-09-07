@@ -56,4 +56,3 @@ jobs:
           SLACK_TITLE: Message
           SLACK_USERNAME: GitHub Bot
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-
