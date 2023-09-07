@@ -5,7 +5,7 @@ on:
       - main
     types: [closed]  
 jobs:
-  Build Docker image:
+  build-docker-image:
     if: github.event.pull_request.merged == true
     runs-on: self-hosted
     steps:
@@ -42,7 +42,7 @@ jobs:
           SLACK_USERNAME: GitHub Bot
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}                   
 
-  Delever to docker-apps:
+  delever-to-docker-apps:
     runs-on: self-hosted
     steps:
       - name: Replace image tag 
