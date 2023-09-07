@@ -56,5 +56,5 @@ jobs:
           SLACK_ICON: https://github.com/rtCamp.png?size=48
           SLACK_MESSAGE: ${{ steps.set-slack-message.outputs.message }}
           SLACK_TITLE: jermuk-city CI
-          SLACK_USERNAME: GitHub Bot
+          SLACK_USERNAME: GitHub Actions
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
