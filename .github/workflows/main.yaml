@@ -43,6 +43,7 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}                   
 
   delever-to-docker-apps:
+    needs: build-docker-image
     runs-on: self-hosted
     steps:
       - name: Replace image tag 
