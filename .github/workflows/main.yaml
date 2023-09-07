@@ -44,7 +44,7 @@ jobs:
 
       - name: Set Slack Message
         id: set-slack-message
-        run: echo "::set-output name=message::${{ job.status == 'success' && 'New version deployed :heavy_check_mark:' || 'Job Failed :x:' }}"
+        run: echo "::set-output name=message::${{ job.status == 'success' && 'Job passed :heavy_check_mark:' || 'Job Failed :x:' }}"
 
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@v2
