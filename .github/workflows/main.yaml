@@ -42,6 +42,10 @@ jobs:
           git commit -m "Update image tag to ${GITHUB_SHA}"
           git push origin main   
 
+      - name: Set Slack Message
+        id: set-slack-message
+        run: echo "::set-output name=message::${{ job.status == 'success' && 'New version deployed :heavy_check_mark:' || 'Job Failed :x:' }}"
+
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@v2
         env:
