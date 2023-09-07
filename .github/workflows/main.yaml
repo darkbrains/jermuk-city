@@ -39,3 +39,20 @@ jobs:
           git add .
           git commit -m "Update image tag to ${GITHUB_SHA}"
           git push origin main   
+
+      - name: Set Slack Message
+        id: set-slack-message
+        run: echo "::set-output name=message::${{ job.status == 'success' && 'Job Passed :heavy_check_mark:' || 'Job Failed :x:' }}"
+
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_MSG_AUTHOR: GitHub Bot
+          MSG_MINIMAL: true
+          SLACK_CHANNEL: alerts-blackdocs
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_ICON: https://github.com/rtCamp.png?size=48
+          SLACK_MESSAGE: ${{ steps.set-slack-message.outputs.message }}
+          SLACK_TITLE: Message
+          SLACK_USERNAME: GitHub Bot
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
