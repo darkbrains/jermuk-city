@@ -45,12 +45,12 @@ jobs:
       - name: Set Slack Message
         id: set-slack-message
         run: |
-          if [[ ${{ steps.docker-build.outcome }} == 'success' ]]; then
-            echo "::set-output name=message::New version deployed :heavy_check_mark:"
-          else
+          if [[ "${{ steps.docker-build.outcome }}" == 'failure' ]]; then
             echo "::set-output name=message::Job Failed :x:"
+          else
+            echo "::set-output name=message::New version deployed :heavy_check_mark:"
           fi
-          
+
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@v2
         if: always() 
