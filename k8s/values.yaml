@@ -2,8 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: jermuk-city
-    env: aws      
+    app: jermuk-city     
   name: jermuk-city
   namespace: webapps
 spec:
@@ -14,11 +13,10 @@ spec:
   template:
     metadata:
       labels:
-        app: jermuk-city
-        env: aws         
+        app: jermuk-city        
     spec:       
       containers:
-      - image: docker.io/blackdocs/jermuk-city:1ac91f2a9d08e7650247c1b670aae9c1d83e96d1
+      - image: docker.io/blackdocs/jermuk-city:f1a621d66186374d2abc85959242671a8ad0f25c
         name: jermuk-city
         imagePullPolicy: Always                
         resources: 
@@ -26,40 +24,24 @@ spec:
             memory: "30Mi"
             cpu: "5m"
           limits:
-            memory: "72Mi"
-            cpu: "30m"                  
+            memory: "60Mi"
+            cpu: "20m"                  
         ports:
           - containerPort: 8888
-            name: http-svc     
-        # command:
-        #   - uvicorn
-        # args:      
-          # - main:app
-          # - '--host'
-          # - '0.0.0.0'
-          # - '--port'
-          # - '8888'  
-          # - '--log-level'
-          # - 'trace'
-        volumeMounts:
-        - mountPath: /tmp
-          name: tmp                    
+            name: http                     
         livenessProbe: 
           httpGet: 
             path: /api/healthz
             port: 8888
           initialDelaySeconds: 5
-          periodSeconds: 120
+          periodSeconds: 60
         readinessProbe:
           httpGet:
             path: /api/healthz
             port: 8888
-          initialDelaySeconds: 120
-          periodSeconds: 10             
-      volumes:
-      - name: tmp
-        emptyDir: {}           
-      terminationGracePeriodSeconds: 30
+          initialDelaySeconds: 5
+          periodSeconds: 60                 
+      terminationGracePeriodSeconds: 10
 
 ---
 
@@ -69,16 +51,15 @@ metadata:
   name: jermuk-city-svc
   labels:
     app: jermuk-city  
-    env: aws  
   namespace: webapps
 spec:
   selector:
     app: jermuk-city
   ports:
-  - name: http-svc
+  - name: http
     protocol: TCP
     port: 8888
-    targetPort: http-svc
+    targetPort: http
 
 ---
 
@@ -88,8 +69,8 @@ metadata:
   name: jermuk-city-ingress
   namespace: webapps
   annotations:
-    # cert-manager.io/cluster-issuer: production
-    # kubernetes.io/tls-acme: "true"
+    cert-manager.io/cluster-issuer: production
+    kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
     nginx.ingress.kubernetes.io/ssl-passthrough: "false"
 spec:
@@ -107,8 +88,8 @@ spec:
               number: 8888
   tls:
   - hosts:
-      - "*.jermuk.city"
-    secretName: jermuk.city           
+      - "www.jermuk.city"
+    secretName: jermuk-cittls           
 
 # ---
 
