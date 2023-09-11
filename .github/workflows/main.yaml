@@ -50,7 +50,7 @@ jobs:
           status: ${{ job.status }}
           notify_when: "success,failure"
           footer: "<{run_url}|View Run>"
-          notification_title: "*jermuk-city CI*"
+          notification_title: "jermuk-city CI"
           message_format: "{emoji} *{workflow}* {status_message} on <{commit_url}|{commit_sha}>"
           token: ${{ secrets.repo_token }}
         env:
