@@ -28,7 +28,8 @@ jobs:
         with:
           repository: Blackdocs-Cloud/live-environments
           ref: main 
-          token: ${{ secrets.TOKEN_GITHUB }}                   
+          token: ${{ secrets.TOKEN_GITHUB }}
+          gpg: ${{ secrets.GPG_KEY_ID }}
 
       - name: Delever to K8S
         run: |
@@ -37,6 +38,8 @@ jobs:
 
       - name: Commit and push changes
         run: |
+          git config --global commit.gpgsign true
+          git config --global user.signingkey ${gpg}
           git config --local user.email "blackdocscloud@gmail.com"
           git config --local user.name "blackdocs-bot"
           git add .
