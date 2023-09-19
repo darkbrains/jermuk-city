@@ -29,18 +29,7 @@ jobs:
           repository: Blackdocs-Cloud/live-environments
           ref: main 
           token: ${{ secrets.TOKEN_GITHUB }}
-
-
-      # - name: Commit and push changes
-      #   run: |
-      #     git config --global commit.gpgsign "true"
-      #     git config --global user.signingkey ${gpg}
-      #     git config --local user.email "blackdocscloud@gmail.com"
-      #     git config --local user.name "blackdocs-bot"
-      #     git add .
-      #     git commit -m "Update image tag to ${GITHUB_SHA}"
-      #     git push origin main   
-
+ 
       - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v6
         with:
