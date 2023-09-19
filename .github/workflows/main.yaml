@@ -31,11 +31,6 @@ jobs:
           token: ${{ secrets.TOKEN_GITHUB }}
 
 
-      - name: Delever to K8S
-        run: |
-          sed -i "s|docker.io/blackdocs/jermuk-city:[^ ]*|docker.io/blackdocs/jermuk-city:${{ github.sha }}|" ./saas/jermuk-city/values.yaml
-        working-directory: ./
-
       # - name: Commit and push changes
       #   run: |
       #     git config --global commit.gpgsign "true"
@@ -47,30 +42,25 @@ jobs:
       #     git push origin main   
 
       - name: Import GPG key
-        run: echo $GPG_KEY | base64 --decode | gpg --batch --import
-        env:
-          GPG_KEY: ${{ secrets.GPG_KEY }}
-    
-      - name: Add the custom gpg siging program that passes the passphrase to the gpg CLI
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+
+      - name: Delever to K8S
         run: |
-          rm -rf /tmp/gpg.sh
-          echo '#!/bin/bash' >> /tmp/gpg.sh
-          echo 'gpg --batch --pinentry-mode=loopback --passphrase $GPG_KEY_PASSPHRASE $@' >> /tmp/gpg.sh
-          chmod +x /tmp/gpg.sh
-    
-      - name: Setup git
+          sed -i "s|docker.io/blackdocs/jermuk-city:[^ ]*|docker.io/blackdocs/jermuk-city:${{ github.sha }}|" ./saas/jermuk-city/values.yaml
+        working-directory: ./
+          
+      - name: Sign commit and push changes
         run: |
-          git config commit.gpgsign true
-          git config user.signingkey $GPG_KEY_ID
+          git add .
           git config --local user.email "blackdocscloud@gmail.com"
           git config --local user.name "blackdocs-bot"
-          git config gpg.program /tmp/gpg.sh
-          git add .
           git commit -m "Update image tag to ${GITHUB_SHA}"
-          git push origin main   
-        env:
-          GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
-
+          git push 
 
       - name: Report Status
         if: always()
