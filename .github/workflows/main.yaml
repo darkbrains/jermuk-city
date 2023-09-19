@@ -38,7 +38,7 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git config --global commit.gpgsign true
+          git config --global commit.gpgsign "true"
           git config --global user.signingkey ${gpg}
           git config --local user.email "blackdocscloud@gmail.com"
           git config --local user.name "blackdocs-bot"
