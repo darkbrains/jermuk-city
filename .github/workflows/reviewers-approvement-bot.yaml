@@ -12,5 +12,5 @@ jobs:
         with:
           github-token: ${{ secrets.TOKEN_GITHUB }}
           pull-request-number: ${{ github.event.inputs.pullRequestNumber }}
-          review-message: "Your pull request has been automatically approved by the bot."
+          review-message: "Your pull request has been automatically approved by the bot 🤖"
           
