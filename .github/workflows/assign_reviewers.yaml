@@ -1,0 +1,28 @@
+name: Assign Reviewer as Bot
+on:
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  assign_reviewers:
+    runs-on: self-hosted
+    steps:
+      - name: Assign Reviewers
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.TOKEN_GITHUB }}
+          script: |
+            const owner = context.payload.repository.owner.login;
+            const repo = context.payload.repository.name;
+            const prNumber = context.payload.pull_request.number;
+            const reviewers = ["blackdocs-bot"];
+
+            for (const reviewer of reviewers) {
+              await github.pulls.createReviewRequest({
+                owner,
+                repo,
+                pull_number: prNumber,
+                reviewers: [reviewer],
+              });
+            }

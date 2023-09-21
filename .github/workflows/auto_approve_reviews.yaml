@@ -1,0 +1,27 @@
+name: Auto-Approve Reviews By Bot
+on:
+  pull_request_review:
+    types:
+      - submitted
+
+jobs:
+  auto_approve_review:
+    runs-on: self-hosted
+    steps:
+      - name: Auto-Approve Review
+        if: github.event.review.user.login == 'blackdocs-bot'
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.TOKEN_GITHUB }}
+          script: |
+            const owner = context.payload.repository.owner.login;
+            const repo = context.payload.repository.name;
+            const prNumber = context.payload.pull_request.number;
+            const commentBody = "This review has been automatically approved by the system.";
+            await github.pulls.createReview({
+              owner,
+              repo,
+              pull_number: prNumber,
+              event: "APPROVE",
+              body: commentBody,
+            });
