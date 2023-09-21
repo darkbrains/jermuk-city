@@ -1,48 +1,26 @@
-name: Bot Workflow
-on:
-  pull_request:
-    types:
-      - opened
+name: Auto PR Review and Approve By Bot
+
+on: [pull_request]
 
 jobs:
-  assign_reviewers:
+  pr-review:
     runs-on: self-hosted
+
     steps:
-      - name: Assign Reviewer
-        uses: actions/github-script@v5
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+      - uses: omio-labs/pr-reviewer-bot@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+
+  auto-approve:
+    runs-on: self-hosted
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: hmarr/auto-approve-action@v3
         with:
           github-token: ${{ secrets.TOKEN_GITHUB }}
-          script: |
-            const owner = context.payload.repository.owner.login;
-            const repo = context.payload.repository.name;
-            const prNumber = context.payload.pull_request.number;
-            const reviewer = "blackdocs-bot";
-
-            await github.pulls.createReviewRequest({
-              owner,
-              repo,
-              pull_number: prNumber,
-              reviewers: [reviewer],
-            });
-
-      - name: Auto-Approve and Comment
-        uses: actions/github-script@v5
-        with:
-          github-token: ${{ secrets.TOKEN_GITHUB }}
-          script: |
-            const owner = context.payload.repository.owner.login;
-            const repo = context.payload.repository.name;
-            const prNumber = context.payload.pull_request.number;
-            const comment = "This pull request has been automatically approved by the bot.";
-            await github.pulls.createReview({
-              owner,
-              repo,
-              pull_number: prNumber,
-              event: "APPROVE",
-            });
-            await github.issues.createComment({
-              owner,
-              repo,
-              issue_number: prNumber,
-              body: comment,
-            });
+          pull-request-number: ${{ github.event.inputs.pullRequestNumber }}
+          review-message: "Your pull request has been automatically approved by the bot."
+          
