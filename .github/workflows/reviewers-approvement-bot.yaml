@@ -3,17 +3,7 @@ name: Auto PR Review and Approve By Bot
 on: [pull_request]
 
 jobs:
-  pr-review:
-    runs-on: self-hosted
-
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-      - uses: omio-labs/pr-reviewer-bot@v1
-        with:
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
-
-  auto-approve:
+  auto-review-approve:
     runs-on: self-hosted
     permissions:
       pull-requests: write
