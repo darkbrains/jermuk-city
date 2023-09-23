@@ -1,0 +1,14 @@
+services:
+  jermuk-city-local:                   
+    image: blackdocs/jermuk-cety:stable-latest
+    labels:
+      logging: "promtail"
+      logging_jobname: "containerlogs"
+      app: "jermuk-city-local"
+    ports:
+      - 8888:8888
+    networks:
+      - aws      
+networks:
+  aws:
+    external: true

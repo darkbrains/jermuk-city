@@ -21,8 +21,18 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}        
       - name: Build and push
         run: |
-          docker build -t blackdocs/jermuk-city:${{ github.sha }} ./
+          docker build -t blackdocs/jermuk-city:${{ github.sha }} -f ./bin/Dockerfile ./bin
           docker image push blackdocs/jermuk-city:${{ github.sha }}
+
+      - name: Push README to Docker Hub
+        uses: christian-korneck/update-container-description-action@v1
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASS: ${{ secrets.DOCKER_PASSWORD }}  
+        with:
+          destination_container_repo: blackdocs/jermuk-city
+          provider: dockerhub
+          readme_file: './bin/README.md'          
 
       - name: Checkout target repository
         uses: actions/checkout@v4
