@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" type="image/x-icon" href="/static/deer.png"/>
+  <title>Jermuk</title>
+  <link rel="stylesheet" type="text/css" href="/static/styles.css"/>
+</head>
+<body>
+  <div class="flying-lights"></div>
+  <div class="birds"></div>    
+  <header>
+    <a href="/en" class="no-underline">
+      <h1 id="headerTitle">Jermuk City</h1>
+    </a>
+    <div class="language-selection">
+        <button onmouseover="showLanguageOptions()" onmouseout="hideLanguageOptions()">Language</button>
+        <div class="language-options" onmouseover="showLanguageOptions()" onmouseout="hideLanguageOptions()">
+          <button onclick="changeLanguage('ARM')">Հայ</button>
+          <button onclick="changeLanguage('RUS')">Рус</button>
+          <button onclick="changeLanguage('ENG')">Eng</button>
+        </div>
+    </div>          
+    <nav>
+    <nav>
+      <ul>
+        <li class="section-links"><a href="#about">About</a></li>
+        <li class="section-links"><a href="#photos">Photos</a></li>
+        <li class="section-links"><a href="#contact">Contacts</a></li>
+        <li class="section-links"><a href="#hotels">Hotels</a></li>
+      </ul>
+    </nav>
+    </nav> 
+  </header>
+  <main>
+    <section id="welcome">
+       <h2>Welcome to Jermuk - Armenia's awesome Jewel!</h2>
+       <p> 
+        Discover a city of natural wonders, history, and warm hospitality. Immerse yourself in mineral-rich hot springs, explore ancient churches, and witness the majestic Jermuk Waterfall. For adventure seekers, hiking trails and breathtaking vistas await. Taste authentic Armenian cuisine and embrace the charm of Jermuk. Welcome to our treasured city! 🌟🇦🇲 
+    </p>
+    </section>
+    <section id="photos">
+      <h2>Photos of Jermuk</h2>
+      <div class="photo-gallery">
+        <div class="photo-item" onclick="openModal('/static/one.jpg')">
+          <img src="/static/one.jpg" alt="Photo 1">
+        </div>
+        <div class="photo-item" onclick="openModal('/static/two.jpg')">
+          <img src="/static/two.jpg" alt="Photo 2">
+        </div>
+        <div class="photo-item" onclick="openModal('/static/three.jpg')">
+          <img src="/static/three.jpg" alt="Photo 3">
+        </div>
+        <div class="photo-item" onclick="openModal('/static/four.jpg')">
+          <img src="/static/four.jpg" alt="Photo 4">
+        </div>
+        <div class="photo-item" onclick="openModal('/static/five.jpg')">
+          <img src="/static/five.jpg" alt="Photo 5">
+        </div>
+        <div class="photo-item" onclick="openModal('/static/six.jpg')">
+          <img src="/static/six.jpg" alt="Photo 6">
+        </div>
+      </div>
+    </section>
+    <section id="about">
+        <h2>About Jermuk City</h2>
+        <p>
+          Jermuk is one of the most famous resort towns in Armenia. It is located in the North-Eastern part of Vayots Dzor region, at an altitude of about 2050 meters above sea level, at the upper reaches of the Arpa River. Flowing through the town, the latter divides it into two parts. The resort is surrounded by picturesque mountain ranges covered with dense forests and alpine meadows.
+          Zvartnots International Airport is 180 km from the property.
+      </p>
+        <h2>Climate</h2>
+        <p>
+          The summers are not so hot here, while the winters are windless and full of snow. The air temperature does not exceed +32C, and reaches as low as -35C in winter.
+      </p>
+        <h2>Mineral Waters</h2>
+        <p>
+          Jermuk is rich with unique fresh and mineral water springs. Among them noteworthy are the warm mineral springs, which rank on a par with similar springs in Karlovy Vary and Zheleznovodsk due to their physical and chemical characteristics. This underground geyser water is used both for drinking and for baths. It is useful for the treatment of various diseases, including gastrointestinal, nephritic and neurological disorders.
+      </p>
+         <h2>Legend of the Deer</h2>
+         <p>  
+          You can see the statue of a deer on a nearby mountain top, as well as a deer pictured on the label of Jermuk mineral water bottles. The legend has it that many years ago when the surrounding forests were full of animals, a hunter wounded a deer with an arrow. The deer ran away and came to the mineral waters of Jermuk. Completely exhausted, the deer jumped into the water and soon came out of it fully cured. The word of the miraculous cure spread fast, and the deer became the symbol of Jermuk.        
+      </p>  
+      </section>
+      <section id="hotels">
+        <h2>Hotels in Jermuk</h2>
+        <p>
+          Experience a comfortable stay at one of Jermuk's finest hotels. Enjoy stunning views, modern amenities, and exceptional hospitality.
+        </p>
+        <div class="photo-gallery-hs">
+          <div class="photo-item-hs" onclick="openModal('/static/jermuk-hotel-spa.jpg')">
+            <img src="/static/jermuk-hotel-spa.jpg" alt="Photo 1">
+            <p class="hotel-name">Jermuk Hotel Spa</p>
+          </div>                        
+          <div class="photo-item-hs">
+            <div class="photo-item-hotels" onclick="openModal('/static/resort.jpg')">
+              <img src="/static/resort.jpg" alt="Photo 2">
+              <p class="hotel-name">Resort Hotel</p>
+            </div>             
+          </div>
+          <div class="photo-item-hs">
+            <div class="photo-item-hotels" onclick="openModal('/static/armenia.jpg')">
+              <img src="/static/armenia.jpg" alt="Photo 3">
+              <p class="hotel-name">Armenia Hotel and SPA</p>
+            </div>             
+          </div>          
+        </div>
+        <div class="hotels-button">
+          <a class="hotelslink" href="/hotels/en">View hotels in Jermuk</a>
+        </div>
+      </section>      
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p>
+        For more information about Jermuk City, feel free to contact us:
+        <br>
+        <!-- Email: info@jermukcity.com -->
+        <br>
+        Phone: +374 94-77-11-39
+        <br>
+        <br>
+        Social Media:
+      </p>
+      <div class="contact-social-icons">
+        <a href="https://api.whatsapp.com/send?phone=37494771139" target="_blank">
+          <img src="/static/whatsapp.png" alt="WhatsApp">
+        </a>
+        <a href="https://www.facebook.com/varo.zaqaryan.3?mibextid=ZbWKwL" target="_blank">
+          <img src="/static/facebook.png" alt="Facebook">
+        </a>
+        <a href="https://t.me/+37494771139" target="_blank">
+          <img src="/static/telegram.png" alt="Telegram">
+        </a>
+        <a href="viber://chat?number=+37494771139" target="_blank">
+          <img src="/static/viber.png" alt="Viber">
+        </a>
+        <a href="https://instagram.com/_varo_tour_?igshid=MzRlODBiNWFlZA==" target="_blank">
+          <img src="/static/instagram.png" alt="Instagram">
+        </a>
+      </div>      
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2023 Jermuk City. All rights reserved.</p>
+  </footer>
+  <div id="modal" class="modal">
+    <span class="close">&times;</span>
+    <div class="modal-content">
+      <img id="modalImage" src="" alt="Modal Image">
+      <button id="prevButton" class="modal-button prev-button" onclick="changeModalImage(-1)">&#8249;</button>
+      <button id="nextButton" class="modal-button next-button" onclick="changeModalImage(1)">&#8250;</button>    
+    </div>
+  </div>
+  <div id="modal" class="modal">
+    <span class="close">&times;</span>
+    <div class="modal-content">
+        <img id="modalImage" src="" alt="Modal Image">
+        <button id="prevButton" class="modal-button prev-button modal-buttons-hs" onclick="changeModalImage(-1)">&#8249;</button>
+        <button id="nextButton" class="modal-button next-button modal-buttons-hs" onclick="changeModalImage(1)">&#8250;</button>
+    </div>
+  </div>  
+  <div class="flying-lights"></div>
+  <div class="birds"></div>
+  <div class="leaves"></div>
+  <script src="/static/main.js"></script>
+</body>
+</html>

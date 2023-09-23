@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" type="image/x-icon" href="/static/deer.png"/>
+  <title>Ջերմուկ</title>
+  <link rel="stylesheet" class="text/css" href="/static/styles.css"/>
+</head>
+<body>
+  <div class="flying-lights"></div>
+  <div class="birds"></div>    
+  <header>
+    <a href="/am" class="no-underline">
+      <h1 id="headerTitle">Jermuk City</h1>
+    </a>
+    <div class="language-selection">
+        <button onmouseover="showLanguageOptions()" onmouseout="hideLanguageOptions()">Լեզու</button>
+        <div class="language-options" onmouseover="showLanguageOptions()" onmouseout="hideLanguageOptions()">
+          <button onclick="changeLanguage('ARM')">Հայ</button>
+          <button onclick="changeLanguage('RUS')">Рус</button>
+          <button onclick="changeLanguage('ENG')">Eng</button>
+        </div>
+    </div>          
+    <nav>
+    <nav>
+      <ul>
+        <li class="section-links"><a href="#about">Քաղաքի մասին</a></li>
+        <li class="section-links"><a href="#photos">Նկարներ</a></li>
+        <li class="section-links"><a href="#contact">Կապ մեզ հետ</a></li>
+        <li class="section-links"><a href="#hotels">Հյուրանոցներ</a></li>
+      </ul>
+    </nav>
+    </nav> 
+  </header>
+  <main>
+    <section id="welcome">
+       <h2>Բարի գալուստ Ջերմուկ՝ Հայաստանի մարգարիտ:</h2>
+       <p> 
+        Բացահայտեք բնության հրաշալիքների, պատմության և ջերմ հյուրընկալության քաղաքը: Սուզվեք հանքային հարուստ տաք աղբյուրներում, տեսեք հնագույն եկեղեցիները և ականատես եղեք Ջերմուկի հիասքանչ ջրվեժին: Արկած փնտրողներին սպասում են արշավային արահետներ և շունչ կտրող տեսարաններ: Համտեսեք իսկական հայկական խոհանոցը և զգացեք Ջերմուկի հմայքը: Բարի գալուստ մեր թանկագին քաղաք: 🌟🇦🇲
+     </p>
+    </section>
+    <section id="photos">
+      <h2>Ջերմուկի լուսանկարները</h2>
+      <div class="photo-gallery">
+        <div class="photo-item" onclick="openModal('/static/one.jpg')">
+          <img src="/static/one.jpg" alt="Photo 1">
+        </div>
+        <div class="photo-item" onclick="openModal('/static/two.jpg')">
+          <img src="/static/two.jpg" alt="Photo 2">
+        </div>
+        <div class="photo-item" onclick="openModal('/static/three.jpg')">
+          <img src="/static/three.jpg" alt="Photo 3">
+        </div>
+        <div class="photo-item" onclick="openModal('/static/four.jpg')">
+          <img src="/static/four.jpg" alt="Photo 4">
+        </div>
+        <div class="photo-item" onclick="openModal('/static/five.jpg')">
+          <img src="/static/five.jpg" alt="Photo 5">
+        </div>
+        <div class="photo-item" onclick="openModal('/static/six.jpg')">
+          <img src="/static/six.jpg" alt="Photo 6">
+        </div>
+      </div>
+    </section>
+    <section id="about">
+        <h2>Ջերմուկ քաղաքի մասին</h2>
+        <p>
+           Ջերմուկը Հայաստանի ամենահայտնի առողջարանային քաղաքներից է։ Գտնվում է Վայոց ձորի մարզի հյուսիս-արևելյան մասում, ծովի մակարդակից մոտ 2050 մ բարձրության վրա, Արփա գետի վերին հոսանքի վրա։ Հոսելով քաղաքով՝ վերջինս այն բաժանում է երկու մասի։ Հանգստավայրը շրջապատված է գեղատեսիլ լեռնաշղթաներով՝ ծածկված խիտ անտառներով և ալպյան մարգագետիններով։
+           Զվարթնոց միջազգային օդանավակայանը 180 կմ հեռավորության վրա է։
+        </p>
+        <h2>Կլիմա</h2>
+        <p>
+           Այստեղ ամառներն այնքան էլ շոգ չեն, մինչդեռ ձմեռներն առանց քամի են ու ձյունով լի։ Օդի ջերմաստիճանը չի գերազանցում +32C, իսկ ձմռանը հասնում է -35C-ի։      
+        </p>
+        <h2>Հանքային ջրեր</h2>
+        <p>
+           Ջերմուկը հարուստ է քաղցրահամ և հանքային ջրերի եզակի աղբյուրներով։ Դրանցից ուշագրավ են տաք հանքային աղբյուրները, որոնք իրենց ֆիզիկա-քիմիական հատկանիշներով հավասարվում են Կառլովի Վարիի և Ժելեզնովոդսկի նմանատիպ աղբյուրներին: Այս ստորգետնյա գեյզերային ջուրն օգտագործվում է ինչպես խմելու, այնպես էլ լոգանքների համար։ Այն օգտակար է տարբեր հիվանդությունների, այդ թվում՝ աղեստամոքսային տրակտի, նեֆրիտիկ և նյարդաբանական խանգարումների բուժման համար։     
+         </p>
+         <h2>Եղնիկի լեգենդը</h2>
+         <p>  
+           Դուք կարող եք տեսնել մոտակա լեռան գագաթին գտնվող եղնիկի արձանը, ինչպես նաև Ջերմուկի հանքային ջրի շշերի պիտակի վրա պատկերված եղնիկը: Ավանդությունն ասում է, որ շատ տարիներ առաջ, երբ շրջակա անտառները լի էին կենդանիներով, որսորդը նետով վիրավորեց եղնիկին: Եղնիկը փախել է ու եկել Ջերմուկի հանքային ջրերի մոտ. Ամբողջովին հյուծված եղնիկը նետվել է ջուրը և շուտով դուրս է եկել այնտեղից ամբողջությամբ բուժված։ Հրաշափառ բուժման խոսքը արագ տարածվեց, իսկ եղնիկը դարձավ Ջերմուկի խորհրդանիշը։      
+        </p>  
+      </section>
+    <section id="hotels">
+      <h2>Hotels in Jermuk</h2>
+      <p>
+        Զգացեք հարմարավետ հանգիստ Ջերմուկի լավագույն հյուրանոցներից մեկում: Վայելեք հիասքանչ տեսարաններ, ժամանակակից հարմարություններ և բացառիկ հյուրընկալություն:
+      </p>
+      <div class="photo-gallery-hs">
+        <div class="photo-item-hs" onclick="openModal('/static/jermuk-hotel-spa.jpg')">
+          <img src="/static/jermuk-hotel-spa.jpg" alt="Photo 1">
+          <p class="hotel-name">Jermuk Hotel Spa</p>
+        </div>                        
+        <div class="photo-item-hs">
+          <div class="photo-item-hotels" onclick="openModal('/static/resort.jpg')">
+            <img src="/static/resort.jpg" alt="Photo 2">
+            <p class="hotel-name">Resort Hotel</p>
+          </div>             
+        </div>
+        <div class="photo-item-hs">
+          <div class="photo-item-hotels" onclick="openModal('/static/armenia.jpg')">
+            <img src="/static/armenia.jpg" alt="Photo 3">
+            <p class="hotel-name">Armenia Hotel and SPA</p>
+          </div>             
+        </div>          
+      </div>
+      <div class="hotels-button">
+        <a class="hotelslink" href="/hotels/am">Դիտեք Ջերմուկի հյուրանոցները</a>
+      </div>
+    </section> 
+    <section id="contact">
+      <h2>Կապ մեզ հետ</h2>
+      <p>
+         Ջերմուկ քաղաքի մասին լրացուցիչ տեղեկությունների համար դիմեք մեզ՝
+        <br>
+        <!-- Էլ․ հասցե`   info@jermukcity.com -->
+        <br>
+        Հեռախոս`   +374 94-77-11-39
+        <br>
+        <br>
+        Սոցիալական կաքեր:
+      </p>
+      <div class="contact-social-icons">
+        <a href="https://api.whatsapp.com/send?phone=37494771139" target="_blank">
+          <img src="/static/whatsapp.png" alt="WhatsApp">
+        </a>
+        <a href="https://www.facebook.com/varo.zaqaryan.3?mibextid=ZbWKwL" target="_blank">
+          <img src="/static/facebook.png" alt="Facebook">
+        </a>
+        <a href="https://t.me/+37494771139" target="_blank">
+          <img src="/static/telegram.pngg" alt="Telegram">
+        </a>
+        <a href="viber://chat?number=+37494771139" target="_blank">
+          <img src="/static/viber.png" alt="Viber">
+        </a>
+        <a href="https://instagram.com/_varo_tour_?igshid=MzRlODBiNWFlZA==" target="_blank">
+          <img src="/static/instagram.png" alt="Instagram">
+        </a>
+      </div>         
+      </p>
+    </section>      
+  </main>
+  <footer>
+    <p>&copy; 2023 Jermuk City. Բոլոր իրավունքները պաշտպանված են:</p>
+  </footer>
+  <div id="modal" class="modal">
+    <span class="close">&times;</span>
+    <div class="modal-content">
+      <img id="modalImage" src="" alt="Modal Image">
+      <button id="prevButton" class="modal-button prev-button" onclick="changeModalImage(-1)">&#8249;</button>
+      <button id="nextButton" class="modal-button next-button" onclick="changeModalImage(1)">&#8250;</button>    
+    </div>
+  </div>
+  <div id="modal" class="modal">
+    <span class="close">&times;</span>
+    <div class="modal-content">
+        <img id="modalImage" src="" alt="Modal Image">
+        <button id="prevButton" class="modal-button prev-button modal-buttons-hs" onclick="changeModalImage(-1)">&#8249;</button>
+        <button id="nextButton" class="modal-button next-button modal-buttons-hs" onclick="changeModalImage(1)">&#8250;</button>
+    </div>
+  </div>
+  <div class="flying-lights"></div>
+  <div class="birds"></div>
+  <div class="leaves"></div>
+  <script src="/static/main.js"></script>  
+</body>
+</html>

@@ -21,8 +21,9 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}        
       - name: Build and push
         run: |
-          docker build -t blackdocs/jermuk-city:${{ github.sha }} ./
+          docker build -t blackdocs/jermuk-city:${{ github.sha }} ./bin
           docker image push blackdocs/jermuk-city:${{ github.sha }}
+          docker pushrm -f ./bin/README.md blackdocs/jermuk-city
 
       - name: Checkout target repository
         uses: actions/checkout@v4
