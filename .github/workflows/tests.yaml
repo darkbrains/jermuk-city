@@ -1,0 +1,38 @@
+name: Node JS Endpoints Tests
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  node-js-endpoints-tests:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      
+      - name: Build test image
+        run: |
+          docker build -t blackdocs/jermuk-city:local -f ./bin/Dockerfile ./bin
+      
+      - name: Run Tests
+        run: |
+          bash ./tests/tests.sh
+
+      - name: Report Status For Tests
+        if: always()
+        uses: ravsamhq/notify-slack-action@v2
+        with:
+          status: ${{ job.status }}
+          notify_when: "success,failure"
+          footer: "<{run_url}|View Run>"
+          notification_title: "node-js-endpoints-tests"
+          message_format: "{emoji} *{workflow}* {status_message} on <{commit_url}|{commit_sha}>"
+          token: ${{ secrets.repo_token }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

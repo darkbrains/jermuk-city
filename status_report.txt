@@ -1,0 +1,10 @@
+/api/healthz 200 OK
+/ 302 OK
+/en 200 OK
+/ru 200 OK
+/am 200 OK
+/hotels 302 OK
+/hotels/en 200 OK
+/hotels/ru 200 OK
+/hotels/am 200 OK
+/empty 404 OK
