@@ -2,7 +2,7 @@ FROM node:latest
 
 WORKDIR /app
 
-COPY /bin/app .
+COPY /app/ .
 
 RUN yarn install
 
