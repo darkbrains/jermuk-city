@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-winston": "^4.2.0",
+    "winston": "^3.10.0"
+  },
+  "name": "jermuk-city",
+  "version": "0.2.0",
+  "description": "jermuk-city web-page",
+  "main": "main.js",
+  "repository": "https://github.com/Blackdocs-Cloud/jermuk-city",
+  "author": "blackdocs",
+  "license": "Apache-2.0",
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "scripts": {
+    "main": "node main.js"
+  }
+}
