@@ -20,7 +20,7 @@ jobs:
 
       - name: Build prod test image
         run: |
-          docker build -t blackdocs/jermuk-city:local -f ./bin/Dockerfile ./bin
+          docker buildx build --platform linux/amd64,linux/arm64 -t blackdocs/jermuk-city:local -f ./bin/Dockerfile ./bin
         
       - name: Run Tests Prod
         run: |
@@ -60,8 +60,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build and push
         run: |
-          docker build -t blackdocs/jermuk-city:${{ github.sha }} -f ./bin/Dockerfile ./bin
-          docker image push blackdocs/jermuk-city:${{ github.sha }}
+          docker buildx build --platform linux/amd64,linux/arm64 blackdocs/jermuk-city:${{ github.sha }} -f ./bin/Dockerfile ./bin --push
 
       - name: Push README to Docker Hub
         uses: christian-korneck/update-container-description-action@v1
