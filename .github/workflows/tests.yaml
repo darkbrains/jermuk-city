@@ -11,31 +11,20 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # - name: Build test image
-      #   run: |
-      #     docker build -t blackdocs/jermuk-city:local -f ./bin/Dockerfile ./bin
-
-      # - name: Log in to Docker Hub
-      #   uses: docker/login-action@v2
-      #   with:
-      #     registry: docker.io
-      #     username: ${{ secrets.DOCKER_USERNAME }}
-      #     password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-
-      - name: Build and push
+      - name: Build test image
         run: |
-          docker buildx build --platform linux/amd64,linux/arm64 blackdocs/jermuk-city:${{ github.sha }} -f ./bin/Dockerfile ./bin
+          docker build -t blackdocs/jermuk-city:local -f ./bin/Dockerfile ./bin
 
-      # - name: Run Tests
-      #   run: |
-      #     bash ./tests/tests.sh
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          registry: docker.io
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Run Tests
+        run: |
+          bash ./tests/tests.sh
 
       - name: Report Status For Tests
         if: always()
