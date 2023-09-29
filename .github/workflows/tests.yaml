@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-            
+
       - name: Build test image
         run: |
           docker build -t blackdocs/jermuk-city:local -f ./bin/Dockerfile ./bin
