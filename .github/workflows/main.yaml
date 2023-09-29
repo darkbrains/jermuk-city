@@ -15,7 +15,7 @@ jobs:
       - name: Build prod test image
         run: |
           docker build -t blackdocs/jermuk-city:local -f ./bin/Dockerfile ./bin
-        
+
       - name: Run Tests Prod
         run: |
           bash ./tests/tests.sh
@@ -78,7 +78,7 @@ jobs:
           repository: Blackdocs-Cloud/live-environments
           ref: main
           token: ${{ secrets.TOKEN_GITHUB }}
- 
+
       - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v6
         with:
@@ -90,7 +90,7 @@ jobs:
         run: |
           sed -i "s|docker.io/blackdocs/jermuk-city:[^ ]*|docker.io/blackdocs/jermuk-city:${{ github.sha }}|" ./saas/jermuk-city/values.yaml
         working-directory: ./
-          
+
       - name: Sign commit and push changes
         run: |
           git add .
