@@ -1,12 +1,8 @@
 #!/bin/bash
 
 
-# Create Docker network
-docker network create test-net --driver bridge
-
-
 # Start jermuk-city Docker container
-docker run --network test-net --name jermuk-city \
+docker run --network actions --name jermuk-city \
   -p 8880:8888 \
   blackdocs/jermuk-city:local &
 
