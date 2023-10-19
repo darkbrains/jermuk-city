@@ -143,15 +143,29 @@ jobs:
           done
 
       - name: Report Status
-        if: always()
+        if: steps.wait.outputs.container_status::not_running
         uses: ravsamhq/notify-slack-action@v2
         with:
           status: ${{ job.status }}
-          notify_when: "success,failure"
+          notify_when: "failure"
           footer: "<{run_url}|View Run>"
           notification_title: "GitHub CD"
           message_format: |
-            ${{ steps.wait.outputs.container_status == 'running' ? '*jermuk-city* Status Synced' : '*jermuk-city* Sync failed. Container not ready' }}
+            jermuk-city* Sync faild. Container not ready
+          token: ${{ secrets.repo_token }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+
+      - name: Report Status
+        if: steps.wait.outputs.container_status::running
+        uses: ravsamhq/notify-slack-action@v2
+        with:
+          status: ${{ job.status }}
+          notify_when: "failure"
+          footer: "<{run_url}|View Run>"
+          notification_title: "GitHub CD"
+          message_format: |
+            *jermuk-city* Status Synced
           token: ${{ secrets.repo_token }}
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
