@@ -104,7 +104,7 @@ jobs:
           git add .
           git config --local user.email "blackdocscloud@gmail.com"
           git config --local user.name "blackdocs-bot"
-          git commit -m "Update image tag to ${GITHUB_SHA}"
+          git commit -m "Update image tag for jermuk-city"
           git push
 
       - name: Report Status
