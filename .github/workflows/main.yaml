@@ -81,9 +81,22 @@ jobs:
           git_user_signingkey: true
           git_commit_gpgsign: true
 
-      - name: Delever to K8S
+      # - name: Delever to K8S
+      #   run: |
+      #     sed -i "s|docker.io/blackdocs/jermuk-city:[^ ]*|docker.io/blackdocs/jermuk-city:${{ github.sha }}|" ./saas/jermuk-city/values.yaml
+      #   working-directory: ./
+
+      # - name: Sign commit and push changes
+      #   run: |
+      #     git add .
+      #     git config --local user.email "blackdocscloud@gmail.com"
+      #     git config --local user.name "blackdocs-bot"
+      #     git commit -m "Update image tag to ${GITHUB_SHA}"
+      #     git push
+
+      - name: Delever to Docker Compose
         run: |
-          sed -i "s|docker.io/blackdocs/jermuk-city:[^ ]*|docker.io/blackdocs/jermuk-city:${{ github.sha }}|" ./saas/jermuk-city/values.yaml
+          sed -i "s|docker.io/blackdocs/jermuk-city:[^ ]*|docker.io/blackdocs/jermuk-city:${{ github.sha }}|" ./docker-live/platform/jermuk-city.yaml
         working-directory: ./
 
       - name: Sign commit and push changes
@@ -103,6 +116,41 @@ jobs:
           footer: "<{run_url}|View Run>"
           notification_title: "jermuk-city CI"
           message_format: "{emoji} *{workflow}* {status_message} on <{commit_url}|{commit_sha}>"
+          token: ${{ secrets.repo_token }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+
+      - name: Docker Compose CD
+        working-directory: ./
+        run: |
+          docker compose -f ./docker-live/platform/jermuk-city.yaml up -d
+
+      - name: Wait for Container to Start
+        id: wait
+        run: |
+          for i in {1..10}; do
+            status=$(docker ps -f "ancestor=blackdocs/jermuk-city:${{ github.sha }}" --format "{{.Status}}")
+            if [[ "$status" == "Up" ]]; then
+              echo "Container is running"
+              echo "::set-output ancestor=container_status::running"
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "Container is not running or restarting"
+          echo "::set-output ancestor=container_status::not_running"
+          exit 1
+
+      - name: Report Status
+        if: always()
+        uses: ravsamhq/notify-slack-action@v2
+        with:
+          status: ${{ job.status }}
+          notify_when: "success,failure"
+          footer: "<{run_url}|View Run>"
+          notification_title: "GitHub CD"
+          message_format: |
+            {if steps.wait.outputs.container_status == 'running'}*jermuk-city* Status Synced{else}*jermuk-city* Sync faild. Container not ready{endif}
           token: ${{ secrets.repo_token }}
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
