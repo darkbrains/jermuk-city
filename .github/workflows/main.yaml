@@ -132,13 +132,13 @@ jobs:
             status=$(docker ps -f "ancestor=blackdocs/jermuk-city:${{ github.sha }}" --format "{{.Status}}")
             if [[ "$status" == "Up" ]]; then
               echo "Container is running"
-              echo "::set-output ancestor=container_status::running"
+              echo "::set-output name=container_status::running"
               exit 0
             fi
             sleep 1
           done
           echo "Container is not running or restarting"
-          echo "::set-output ancestor=container_status::not_running"
+          echo "::set-output name=container_status::not_running"
           exit 1
 
       - name: Report Status
