@@ -143,7 +143,7 @@ jobs:
           done
 
       - name: Report Status
-        if: steps.wait.outputs.container_status::not_running
+        if: steps.wait.outputs.container_status == 'not_running'
         uses: ravsamhq/notify-slack-action@v2
         with:
           status: ${{ job.status }}
@@ -157,7 +157,7 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
 
       - name: Report Status
-        if: steps.wait.outputs.container_status::running
+        if: steps.wait.outputs.container_status == 'running'
         uses: ravsamhq/notify-slack-action@v2
         with:
           status: ${{ job.status }}
