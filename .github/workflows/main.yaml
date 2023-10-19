@@ -151,7 +151,7 @@ jobs:
           footer: "<{run_url}|View Run>"
           notification_title: "GitHub CD"
           message_format: |
-            *jermuk-city* Sync faild. Container not ready
+            {emoji} *jermuk-city* Sync faild. Container not ready
           token: ${{ secrets.repo_token }}
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
@@ -165,7 +165,7 @@ jobs:
           footer: "<{run_url}|View Run>"
           notification_title: "GitHub CD"
           message_format: |
-            *jermuk-city* Status Synced
+            {emoji} *jermuk-city* Status Synced
           token: ${{ secrets.repo_token }}
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
