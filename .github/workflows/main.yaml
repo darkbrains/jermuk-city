@@ -151,7 +151,7 @@ jobs:
           footer: "<{run_url}|View Run>"
           notification_title: "GitHub CD"
           message_format: |
-            {if steps.wait.outputs.container_status == 'running'}*jermuk-city* Status Synced{else}*jermuk-city* Sync faild. Container not ready{endif}
+            ${{ steps.wait.outputs.container_status == 'running' ? '*jermuk-city* Status Synced' : '*jermuk-city* Sync failed. Container not ready' }}
           token: ${{ secrets.repo_token }}
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
