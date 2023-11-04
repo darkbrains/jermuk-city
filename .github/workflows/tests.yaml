@@ -13,7 +13,7 @@ jobs:
 
       - name: Build test image
         run: |
-          docker build -t blackdocs/jermuk-city:local -f ./bin/Dockerfile ./bin
+          docker build -t darkbrains/jermuk-city:local -f ./bin/Dockerfile ./bin
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2

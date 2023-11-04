@@ -5,7 +5,7 @@
 docker network create actions --driver bridge
 
 docker run --network actions --name jermuk-city-tests -p 8888:8888 \
-  blackdocs/jermuk-city:local &
+  darkbrains/jermuk-city:local &
 
 sleep 5
 
