@@ -4,6 +4,7 @@
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "express-winston": "^4.2.0",
+    "prom-client": "^15.0.0",
     "winston": "^3.10.0"
   },
   "name": "jermuk-city",
