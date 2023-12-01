@@ -1,8 +1,8 @@
 # Jermuk City
 
-[![GitHub Repo](https://img.shields.io/badge/GitHub-Repo-blue)](https://github.com/Blackdocs-Cloud/jermuk-city)
-[![GitHub](https://img.shields.io/badge/GitHub-Releases-green)](https://github.com/Blackdocs-Cloud/jermuk-city/releases)
-![GitHub Workflow Status](https://github.com/Blackdocs-Cloud/jermuk-city/actions/workflows/tests.yaml/badge.svg?branch=dev)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repo-blue)](https://github.com/Darkbrains/jermuk-city)
+[![GitHub](https://img.shields.io/badge/GitHub-Releases-green)](https://github.com/Darkbrains/jermuk-city/releases)
+![GitHub Workflow Status](https://github.com/Darkbrains/jermuk-city/actions/workflows/tests.yaml/badge.svg?branch=dev)
 
 ## Project Description
 
